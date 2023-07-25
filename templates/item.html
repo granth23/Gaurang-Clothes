@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="box">
+    <div class="row">
+        <div class="imge">
+            <img class="iii" src={{product.get('image')}}>
+        </div>
+        <div class="deta">
+            <h3>{{product.get('category') + " " + product.get('name')}}</h3>
+            <br>
+            {% if product.get('srp') == product.get('mrp') %}
+            {{product.get('srp')}}
+            {% else %}
+            INR {{product.get('srp')}} &nbsp;
+            <strike>INR {{product.get('mrp')}}</strike>
+            {% endif %}
+            <p>{{product.get('info')}}</p>
+            <br>
+            <form style="margin-top: -5px;" method="POST" action="/{{product.get('_id')}}" class="d-flex upqty">
+                {% if product.get('quantity') > 5 %}
+                <input class="ml" type="number" id="quantity" name="quantity" min="0" max={{5}} value={{cqty}}
+                    style="text-align: center; border: 1px solid black; width: 70%; height: 40px">
+                &nbsp;&nbsp;&nbsp;
+                <button type="submit" style="border: 1px solid black; width: 30%; ; height: 40px"><i
+                        class="fa fa-check pointer"></i></button>
+                {% else %}
+                <input class="ml" type="number" id="quantity" name="quantity" min="0" max={{product.get('quantity')}}
+                    value={{cqty}} style="text-align: center; border: 1px solid black; width: 70%; height: 40px">
+                &nbsp;&nbsp;&nbsp;
+                <button type="submit" style="width: 30%; height: 40px; border: 1px solid black;"><i
+                        class="fa fa-check pointer"></i></button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var cqty = {{ cqty }};
+    var lcqty = {{ product.get('quantity') }}
+    if (cqty < 5) {
+        console.log("ncfffbdhcbdh")
+        document.getElementById("addtomin").style.visibility = 'hidden';
+        document.getElementById("addtomax").style.visibility = 'visible';
+    }
+    if (cqty == 5) {
+        console.log("ncfffndhncd")
+        document.getElementById("addtomax").style.visibility = 'hidden';
+        document.getElementById("addtomin").style.visibility = 'visible';
+    }
+    if (cqty == lcqty) {
+        console.log("ncfff")
+        document.getElementById("addtomax").style.visibility = 'hidden';
+        document.getElementById("addtomin").style.visibility = 'visible';
+    }
+</script>
+
+
+{% endblock content %}

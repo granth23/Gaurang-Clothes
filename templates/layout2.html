@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gamestrade</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/main.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+</head>
+
+<head>
+    <link rel="shortcut icon" href="https://fplogoimages.withfloats.com/actual/61379f118bd9fb0001c704ce.png"
+        type="image/x-icon">
+
+    <nav id="top" class="navbar navbar-expand-lg navbar-light nav-top"
+        style="border-bottom: 1px solid rgba(0, 247, 255, 0.623);">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <ul class="navbar-nav" style="color:white;">
+            <li class="nav-item">
+                <i class="fa fa-clock-o">&nbsp;</i> {{ status }} &nbsp;&nbsp;
+                | &nbsp;&nbsp;
+                <i class="fa fa-phone"> &nbsp; </i>+918048034625 &nbsp;
+            </li>
+        </ul>
+    </nav>
+
+    <nav class="navbar">
+        <a class="navbar-brand" href="/home" style="color:white">
+            <img src="https://getbootstrap.com/docs/4.2/assets/brand/bootstrap-solid.svg" width="30" height="30"
+                class="d-inline-block align-top" alt="">
+            Bootstrap
+        </a>
+        <form method="POST" action="{{ url_for('search') }}" class="d-flex">
+            {{ form.hidden_tag() }}
+            <input class="form-control ml" style="border-color: white; border-radius:0px;" type="search"
+                placeholder="Search" ,aria-label="Search" , name="search">
+            <button class="btn" style="border-color: white; color:white; border-radius:0px" type="submit">
+                <i class="fa fa-search"></i></button>
+        </form>
+    </nav>
+
+    <nav id="navbar_top" class="navbar nav-top navbar-fixed-top ">
+        <a class="nav-link" href="{{ url_for('new_product') }}">New Product</a>
+        <a class="nav-link" href="{{ url_for('update_prod') }}">Update Product</a>
+        <a class="nav-link" href="{{ url_for('add_track') }}">New Orders</a>
+        <a class="nav-link" href="{{ url_for('check_order') }}">Past Orders</a>
+    </nav>
+
+    <a id="button"></a>
+    <script src="./static/script.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+</body>
+
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-cta pt-5 pb-4">
+            <div class="row">
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="single-cta">
+                        <i class="fa fa-map"></i>
+                        <div class="cta-text">
+                            <div class="footer-widget-heading">
+                                <h3>Find us</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-social-icon">
+                        <span style="color:#757575">245-A 2nd Floor Sant Nagar <br> East Of Kailash, New
+                            Delhi-110065</span>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="single-cta">
+                        <i class="fa fa-phone"></i>
+                        <div class="cta-text">
+                            <div class="footer-widget-heading">
+                                <h3>Call us</h3>
+                            </div>
+                            <span>9899860757 <br> 9811790757</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="single-cta">
+                        <i class="fa fa-envelope-open"></i>
+                        <div class="cta-text">
+                            <div class="footer-widget-heading">
+                                <h3>Mail us</h43>
+                            </div>
+                            <span>tarun@ziptech.in <br> granthbagadia@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-cta pt-4 pb-4">
+            <div class="row">
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="single-cta">
+                        <i class="fa fa-rocket"></i>
+                        <div class="cta-text">
+                            <div class="footer-widget-heading">
+                                <h3>Subscribe</h3>
+                            </div>
+                        </div>
+                        <div class="subscribe-form">
+                            <form action="#">
+                                <input type="text" placeholder="Email Address">
+                                <button><i class="fa fa-telegram"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="single-cta">
+                        <i class="fa fa-share"></i>
+                        <div class="cta-text">
+                            <div class="footer-widget-heading">
+                                <h3>Follow Us On</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-social-icon">
+                        <a href="#"><i class="fa fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-30 mt-2 mb-4">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <a href="index.html"><img src="https://i.ibb.co/QDy827D/ak-logo.png" class="img-fluid"
+                                    alt="logo"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</footer>
+
+</html>

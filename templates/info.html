@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if t == "info" %}
+
+<div class="box">
+    <center>
+        <h2> Enter Appropriate Details
+        </h2>
+        <br>
+    </center>
+    <form method="POST" action="{{ url_for('pay') }}" class="formi">
+        <ul>
+            <li>
+                <label><span>Name</span></label>
+                <input class="textareatt" type="text" name="name" required="required">
+            </li>
+            <br>
+            <li>
+                <label><span>Phone</span></label>
+                <input class="textareatt" type="text" name="phone" required="required">
+            </li>
+            <br>
+            <li>
+                <label><span>Address</span></label>
+                <textarea class="textareatt" type="text" name="address" required="required"></textarea>
+            </li>
+            <li>
+                <input class="textareatt pointer" type="submit">
+            </li>
+        </ul>
+    </form>
+</div>
+
+{% elif t == "signup" %}
+
+<div class="box">
+    <form class='formi' method="post" action="/sign-up/{{x}}">
+        <center>
+            <h2> Please Enter your E-Mail ID
+            </h2>
+        </center>
+        <br>
+        <ul>
+            <li>
+                <input class="textareatt" type="email" id="email" name="email" required="required"
+                    style="margin-bottom:10px">
+            </li>
+            <li>
+                <input class="textareatt pointer" type="submit">
+            </li>
+        </ul>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock content %}

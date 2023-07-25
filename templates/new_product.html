@@ -1,0 +1,67 @@
+{% extends "layout2.html" %}
+{% block content %}
+
+<div class="box">
+    <h1>New Product</h1>
+    <br>
+    <form method="POST" action="{{ url_for('new_prod') }}">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:45%" ,
+                name="category" , placeholder="Category">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:35px" value=""
+                disabled>
+            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:45%" , name="name"
+                , placeholder="Name">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:30px" value=""
+                disabled>
+            <button class="btn" style="border-color: black; color:#000 ; border-radius:0px;" type="submit">
+                <i class="fa fa-check"></i></button>
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+        </div>
+        <div class="row">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:32%" , name="mrp" ,
+                placeholder="MRP">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:32%" , name="srp" ,
+                placeholder="SRP">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:30%" ,
+                name="quantity" , placeholder="Quantity">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+        </div>
+        <div class="row">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:98%" , name="image"
+                , placeholder="Image URL">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+        </div>
+        <div class="row">
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+                disabled>
+            <textarea class="btn" name="info"
+                style="text-align:left; border-color: black; width:98%; height:200px; padding: 20px" ,
+                placeholder=""></textarea>
+            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" disabled>
+        </div>
+    </form>
+    <div class="row">
+        <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+            disabled>
+        <input class="btn" style="border-color: black; border-radius:0px; width:98%" , value="{{message}}" disabled>
+        <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
+            disabled>
+    </div>
+</div>
+
+{% endblock content %}

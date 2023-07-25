@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gamestrade</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/main.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+</head>
+
+<head>
+    <link rel="shortcut icon" href="https://fplogoimages.withfloats.com/actual/61379f118bd9fb0001c704ce.png"
+        type="image/x-icon">
+
+    <nav id="top" class="navbar navbar-expand-lg navbar-light nav-top"
+        style="border-bottom: 1px solid rgba(0, 247, 255, 0.623);">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <ul class="navbar-nav" style="color:white;">
+            <li class="nav-item">
+                <i class="fa fa-clock-o">&nbsp;</i> {{ status }} &nbsp;&nbsp;
+                | &nbsp;&nbsp;
+                <i class="fa fa-phone"> &nbsp; </i>+918048034625 &nbsp;
+            </li>
+        </ul>
+    </nav>
+
+    <nav class="navbar">
+        <a class="navbar-brand" href="/" style="color:white">
+            <img src="https://getbootstrap.com/docs/4.2/assets/brand/bootstrap-solid.svg" width="35" height="35"
+                class="d-inline-block align-top" alt="">
+            <div class="d-inline-block" style="margin-top:3px">&nbsp; Bootstrap</div>
+        </a>
+        <div class="navbar-item topf">
+            <form method="POST" action="{{ url_for('search') }}" class="d-flex">
+                {{ form.hidden_tag() }}
+                <input class="form-control ml search searchbtn" style="border-color: white; border-radius:0px; ""
+                    type=" search" placeholder="Search" ,aria-label="Search" , name="search">
+                <button class="btn searchbtn" style="border-color: white; color:white; border-radius:0px;"
+                    type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+                <a href="/cart">
+                    <span class="fa-stack fa-2x has-badge cartbtn" data-count="{{ total_qty }}"
+                        style="transform:scale(0.75); height:10px" href="/cart">
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+            </form>
+        </div>
+    </nav>
+
+    <nav id="navbar_top" class="navbar nav-top navbar-fixed-top phone">
+        <li class="nav-item dropdown dropbtn phone">
+            <a class="nav-link dropdown-toggle dropbtn" style="margin-top:-25px" href="#" id="navbarDropdownMenuLink"
+                data-toggle="dropdown">
+                PLAYSTATION
+            </a>
+            <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/PS4">
+                    <i class="fab fa-playstation"></i>PLAYSTATION 4</a>
+                <a class="dropdown-item" href="/PS5">
+                    <i class="fab fa-playstation"></i>PLAYSTATION 5</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown dropbtn">
+            <a class="nav-link dropdown-toggle dropbtn" style="margin-top:-25px" href="#" id="navbarDropdownMenuLink"
+                data-toggle="dropdown">
+                XBOX
+            </a>
+            <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/XBOX1">
+                    <i class="fab fa-xbox"></i>XBOX 1</a>
+                <a class="dropdown-item" href="/XBOXx">
+                    <i class="fab fa-xbox"></i>XBOX X</a>
+            </div>
+        </li> <a class="nav-link" href="/NINTENDO">NINTENDO</a>
+        <a class="nav-link" href="/ACCESSORIES">ACCESSORIES</a>
+        <a class="nav-link" href="/DIGITAL">DIGITAL</a>
+        <a class="nav-link" href="/SURFACE">SURFACE</a>
+        <a class="nav-link" href="/contact-us">CONTACT US</a>
+    </nav>
+    <a id="button"></a>
+    <script src="./static/script.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+</body>
+
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-cta pl-5 pt-5 pb-4">
+            <div class="row">
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="single-cta">
+                        <i class="fa fa-map"></i>
+                        <div class="cta-text">
+                            <div class="footer-widget-heading">
+                                <h3>Find us</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-social-icon">
+                        <span style="color:#757575">
+                            245-A 2nd Floor Sant Nagar
+                            <br>
+                            East Of Kailash, New Delhi-110065
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="single-cta">
+                        <i class="fa fa-phone"></i>
+                        <div class="cta-text">
+                            <div class="footer-widget-heading">
+                                <h3>Call us</h3>
+                            </div>
+                            <span>
+                                <a href="tel:+919899860757">+91 9899860757</a>
+                                <br>
+                                <a href="tel:+919811790757">+91 9811790757</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="single-cta">
+                        <i class="fa fa-envelope-open"></i>
+                        <div class="cta-text">
+                            <div class="footer-widget-heading">
+                                <h3>Mail us</h43>
+                            </div>
+                            <span>
+                                <a href="mailto:tarun@ziptech.in">tarun@ziptech.in</a>
+                                <br>
+                                <a href="mailto:granthbagadia@gmail.com">granthbagadia@gmail.com</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer pt-4 ">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+    <div class="phonebar">
+    </div>
+</footer>
+
+</html>

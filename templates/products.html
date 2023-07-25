@@ -1,0 +1,237 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div id="al"></div>
+
+<div class="box">
+    <center>
+        <h1>{{x}}</h1>
+        <br>
+        <hr style="background-color: rgba(0, 0, 0, 0.76); height: .1%;">
+        <br>
+    </center>
+    <br>
+    {% if products == [] %}
+    <center>
+        <h3>No Items available</h3>
+    </center>
+    {% else %}
+    <div id="1" style="display:block;">
+        <div class="row">
+            {% for i in products[0] %}
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+                <div class="card">
+                    <a class="card-a" href="/{{i.get('_id')}}">
+                        <div class="card-img-body">
+                            <img src={{ i.get('image') }} class="card-img">
+                        </div>
+                    </a>
+                    <center>
+                        <div class="card-body">
+                            <a class="card-a" href="/{{i.get('_id')}}">
+                                <h2 class="card-title">{{ i.get('category')+" "+i.get('name') }}</h2>
+                                {% if i.get('srp') == i.get('mrp') %}
+                                INR {{i.get('srp')}}
+                                <br>
+                                {% else %}
+                                INR {{i.get('srp')}} &nbsp;
+                                <strike>INR {{i.get('mrp')}}</strike>
+                                {% endif %}
+                            </a>
+                            {% if i.get('cqty') == 0 %}
+                            <button class="card-button" style="margin-top:15px;">
+                                <a id="addtomax{{i.get('_id')}}" class="card-a" href="/add/1{{i.get('_id')}}"
+                                    style="color: #fff;">Add To Cart</a>
+                            </button>
+                            {% else %}
+                            <br><br>
+                            <form style="margin-top: -5px;" method="POST" action="/cart" class="d-flex upqty">
+                                {% if i.get('quantity') > 5 %}
+                                <input class="ml" type="number" id="quantity{{cart.index(i)}}"
+                                    name="quantity{{cart.index(i)}}" min="0" max={{5}} value={{i.get('cqty')}}
+                                    style="text-align: center; border: 1px solid black; width: 70%; height: 40px">
+                                &nbsp;&nbsp;&nbsp;
+                                <button type="submit" style="border: 1px solid black; width: 30%; ; height: 40px"><i
+                                        class="fa fa-check pointer"></i></button>
+                                {% else %}
+                                <input class="ml" type="number" id="quantity{{cart.index(i)}}"
+                                    name="quantity{{cart.index(i)}}" min="0" max={{i.get('quantity')}}
+                                    value={{i.get('cqty')}}
+                                    style="text-align: center; border: 1px solid black; width: 70%; height: 40px">
+                                &nbsp;&nbsp;&nbsp;
+                                <button type="submit" style="width: 30%; height: 40px; border: 1px solid black;"><i
+                                        class="fa fa-check pointer"></i></button>
+                                {% endif %}
+                            </form>
+                            {% endif %}
+                        </div>
+                    </center>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% for j in range(2, lenproducts+1) %}
+
+    <div id={{j}} style="display:none;">
+        <div class="row">
+            {% for i in products[j-1] %}
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+                <div class="card">
+                    <a class="card-a" href="/{{i.get('_id')}}">
+                        <div class="card-img-body">
+                            <img src={{ i.get('image') }} class="card-img">
+                        </div>
+                        <center>
+                            <div class="card-body">
+                                <h2 class="card-title">{{ i.get('category')+" "+i.get('name') }}</h2>
+                                {% if i.get('srp') == i.get('mrp') %}
+                                INR {{i.get('srp')}}
+                                <br>
+                                {% else %}
+                                INR {{i.get('srp')}} &nbsp;
+                                <strike>INR {{i.get('mrp')}}</strike>
+                                {% endif %}
+                                {% if i.get('cqty') == 0 %}
+                                <button class="card-button" style="margin-top:15px;">
+                                    <a id="addtomax{{i.get('_id')}}" class="card-a" href="/add/1{{i.get('_id')}}"
+                                        style="color: #fff;">Add To Cart</a>
+                                </button>
+                                {% else %}
+                                <br><br>
+                                <form style="margin-top: -5px;" method="POST" action="/cart" class="d-flex upqty">
+                                    {% if i.get('quantity') > 5 %}
+                                    <input class="ml" type="number" id="quantity{{cart.index(i)}}"
+                                        name="quantity{{cart.index(i)}}" min="0" max={{5}} value={{i.get('cqty')}}
+                                        style="text-align: center; border: 1px solid black; width: 70%; height: 40px">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button type="submit" style="border: 1px solid black; width: 30%; ; height: 40px"><i
+                                            class="fa fa-check pointer"></i></button>
+                                    {% else %}
+                                    <input class="ml" type="number" id="quantity{{cart.index(i)}}"
+                                        name="quantity{{cart.index(i)}}" min="0" max={{i.get('quantity')}}
+                                        value={{i.get('cqty')}}
+                                        style="text-align: center; border: 1px solid black; width: 70%; height: 40px">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button type="submit" style="width: 30%; height: 40px; border: 1px solid black;"><i
+                                            class="fa fa-check pointer"></i></button>
+                                    {% endif %}
+                                </form>
+                                {% endif %}
+                        </center>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endfor %}
+
+
+<center>
+    <a href="#al"><button onclick="prev()" id="p" style="visibility:hidden">Prev</button></a>
+
+    {% for i in range(1, lenproducts+1) %}
+    <a href="#al" id="range"><button onclick="show({{ i }})">{{ i }}</button></a>
+    {% endfor %}
+
+    <a href="#al"><button onclick="next()" id="n" style="visibility:hidden">Next</button></a>
+</center>
+
+</div>
+
+<script>
+
+    var l = {{ lenproducts }};
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    if (l != 0) {
+        console.log(l);
+        document.getElementById("n").style.visibility = 'visible';
+    }
+
+    function show(x) {
+        for (let i = 1; i < l + 1; i++) {
+            if (i == x) {
+                document.getElementById(i).style.display = "block";
+            } else {
+                document.getElementById(i).style.display = "none";
+            }
+        }
+        pcheck()
+        ncheck()
+    }
+
+    function next() {
+        if (document.getElementById(l).style.display == "none") {
+            for (let i = 1; i < l + 1; i++) {
+                const a = document.getElementById(i)
+                if (a.style.display == "block") {
+                    show(i + 1);
+                    pcheck();
+                    ncheck();
+                    break;
+                }
+            }
+        }
+    }
+
+    function prev() {
+        if (document.getElementById(1).style.display == "none") {
+            for (let i = 1; i < l + 1; i++) {
+                const a = document.getElementById(i)
+                if (a.style.display == "block") {
+                    show(i - 1);
+                    pcheck();
+                    ncheck()
+                    break;
+                }
+            }
+        }
+    }
+
+    function pcheck() {
+        if (document.getElementById(1).style.display == "block") {
+            const element = document.getElementById('p')
+            document.getElementById("p").style.visibility = 'hidden';
+        } else {
+            document.getElementById("p").style.visibility = 'visible';
+        }
+    }
+
+    function ncheck() {
+        if (document.getElementById(l).style.display == "block") {
+            const element = document.getElementById('p')
+            document.getElementById("n").style.visibility = 'hidden';
+        } else {
+            document.getElementById("n").style.visibility = 'visible';
+        }
+    }
+
+    if (l <= 1) {
+        document.getElementById("n").style.visibility = 'hidden';
+    }
+
+    if (l > 5) {
+        document.getElementById("range").style.visibility = 'hidden';
+    }
+
+    if (l <= 1) {
+        document.getElementById("range").style.visibility = 'hidden';
+    }
+
+</script>
+
+{% endblock content %}

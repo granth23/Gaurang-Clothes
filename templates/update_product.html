@@ -1,0 +1,41 @@
+{% extends "layout2.html" %}
+{% block content %}
+
+<div class="box">
+    <h1>Update Product</h1>
+    <br>
+    {% for i in products %}
+    <form method="POST" action="{{ url_for('update_prod') }}" class="d-flex">
+        {{ form.hidden_tag() }}
+        <button class="btn" style="border-color: black; color:#000 ; border-radius:0px; width:150px" type="submit"
+            disabled>
+            {{ products.index(i) + 1 }}</button>
+        <input class="form-control ml" style="width:10px; visibility: hidden" type="search" placeholder="Search"
+            ,aria-label="Search" , name="idt" , value="{{ i.get('_id') }}">
+        <img class="iii" src={{i.get('image')}} style="width:175px; border: 1px solid #000; padding: 2px">
+        <input class="form-control ml" style="width:10px; visibility: hidden" type="search" placeholder="Search"
+            ,aria-label="Search" ,value="{{ i.get('_id') }}">
+        <input class="btn" style="border-color: black; border-radius:0px;"
+            value="{{ i.get('category') }} {{ i.get('name') }}" disabled>
+        <input class="form-control ml" style="width:10px; visibility: hidden" type="search" placeholder="Search"
+            ,aria-label="Search" , value="{{ i.get('_id') }}">
+        <input class="btn" style="border-color: black; border-radius:0px;" type="search" placeholder="Search"
+            ,aria-label="Search" , name="mrp" , value="{{ i.get('mrp') }}">
+        <input class="form-control ml" style="width:10px; visibility: hidden" type="search" placeholder="Search"
+            ,aria-label="Search" , value="{{ i.get('_id') }}">
+        <input class="btn" style="border-color: black; border-radius:0px;" type="search" placeholder="Search"
+            ,aria-label="Search" , name="srp" , value="{{ i.get('srp') }}">
+        <input class="form-control ml" style="width:10px; visibility: hidden" type="search" placeholder="Search"
+            ,aria-label="Search" , value="{{ i.get('_id') }}">
+        <input class="btn" style="border-color: black; border-radius:0px;" type="search" placeholder="Search"
+            ,aria-label="Search" , name="quantity" , value="{{ i.get('quantity') }}">
+        <input class="form-control ml" style="width:10px; visibility: hidden" type="search" placeholder="Search"
+            ,aria-label="Search" , value="{{ i.get('_id') }}">
+        <button class="btn" style="border-color: black; color:#000 ; border-radius:0px; width:150px" type="submit">
+            <i class="fa fa-check"></i></button>
+    </form>
+    <br>
+    {% endfor %}
+</div>
+
+{% endblock content %}

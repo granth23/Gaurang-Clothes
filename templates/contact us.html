@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div style="padding:25px; padding-bottom: 10px; background-color: rgb(24, 27, 70);;">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding:15px">
+        <strong>{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+{% endfor %}
+
+<div class="box">
+    <center>
+        <h2> Contact Us </h2>
+        <br>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.4660132305744!2d77.2466625509966!3d28.55576588236198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce3c9b9b29fa3%3A0x36ab24e265479f28!2sZIP%20TECHNOLOGIES!5e0!3m2!1sen!2sin!4v1644935268609!5m2!1sen!2sin"
+            class="map ">
+        </iframe>
+    </center>
+    <br>
+    <hr style="background-color: rgba(0, 0, 0, 0.76); height: .01px">
+    <br>
+    <center>
+        <h2>Get in touch with us !</h2>
+    </center>
+    <br>
+    <br>
+    <div class="row">
+        <div class="uscolumn" style="border-right: 1px solid #000;">
+            <i class="fa fa-phone"></i>
+            <h2>Phone</h2>
+            <p>9899860757 <br> 9811790757</p>
+        </div>
+        <div class="uscolumn">
+            <i class="fa fa-map-marker"></i>
+            <h2>Address</h2>
+            <p>245-A 2nd Floor Sant Nagar <br> East Of Kailash, New Delhi-110065</p>
+        </div>
+        <div class="uscolumn" style="border-left: 1px solid #000;">
+            <i class="fa fa-envelope"></i>
+            <h2>E-Mail</h2>
+            <p>tarun@ziptech.in <br> granthbagadia@gmail.com</p>
+        </div>
+    </div>
+    <br>
+    <hr style="background-color: rgba(0, 0, 0, 0.76); height: .01px">
+    <br>
+    <center>
+        <h2> Please contact us if you have any queries.
+        </h2>
+    </center>
+    <br>
+    <form method="POST" action="{{ url_for('contact') }}" class="formi">
+        <ul>
+            <li>
+                <label for="mail"><span>Email</span></label>
+                <input class="textareatt" type="email" id="mail" name="mail" required="required">
+            </li>
+            <br>
+            <li>
+                <label for="msg"><span>Message</span></label>
+                <textarea class="textareatt" rows="2" cols="50" name="message" required="required"></textarea>
+            </li>
+            <li>
+                <input class="textareatt pointer" type="submit">
+            </li>
+        </ul>
+    </form>
+</div>
+
+{% endblock content %}

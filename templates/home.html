@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div style="padding:25px; padding-bottom: 10px; background-color: rgb(24, 27, 70);;">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding:15px">
+        <strong>{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+{% endfor %}
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100 carousel-img"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
+                alt="First slide">
+        </div>
+        <div class="carousel-item ">
+            <img class="d-block w-100 carousel-img"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
+                alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100 "
+                src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
+                alt="Third slide">
+        </div>
+    </div>
+
+</div>
+
+<div class="box">
+    <div class="section-container">
+        <div class="columns content content-container">
+            <div class="content-container">
+                <p style="font-weight:500; font-size: 25px;">ABOUT US</p>
+                <p>
+                    Games Trade markets and sells Video Games, Console & Accessories through digital
+                    distribution channels, as well as through retail channels, such as mass
+                    market retailers, electronics specialty stores, and game software specialty stores.
+                    Games Trade has been in this gaming industry for past 2 decades and understand the nerves
+                    of every-gamer.
+                    <br><br>
+                    We are also authorized dealer for Microsoft Surface Devices & Accessories and Microsoft Office
+                    products
+                    including Surface Pro, Surface Go, Surface Laptop, Surface Book, etc. Our objective is to provide
+                    the latest and best to our customers at competitive prices without compromising on service.
+                </p>
+            </div>
+        </div>
+        <div class="columns image">
+            <img class="columns image ats phoneabout" src="https://fpimages.withfloats.com/tile/61fe378e35b0d500010250d0.jpg">
+            <div class="overlay"></div>
+        </div>
+    </div>
+    <br>
+    <hr style="background-color: rgba(0, 0, 0, 0.76); height: 1%;">
+    <br>
+    <center>
+        <h2> LATEST PRODUCTS </h2>
+    </center>
+    <br>
+    <div class="row">
+        {% for i in updates %}
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+            <a class="card-a" href="{{ i.get('_id') }}">
+                <div class="card">
+                    <div class="card-img-body">
+                        <img src="{{ i.get('image') }}" class="card-img">
+                    </div>
+                    <center>
+                        <div class="card-body">
+                            <h2 class="card-title">{{ i.get('category') }} {{ i.get('name') }}</h2>
+                            {% if i.get('srp') == i.get('mrp') %}
+                            INR {{i.get('srp')}}
+                            <br>
+                            {% else %}
+                            INR {{i.get('srp')}} &nbsp;
+                            <strike>INR {{i.get('mrp')}}</strike>
+                            {% endif %}
+                            <br>
+                            <br>
+                            <button class="card-button">
+                                <a class="card-a" style="color: #fff" href="/add/1{{i.get('_id')}}">Add
+                                    To Cart</a>
+                            </button>
+                        </div>
+                    </center>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+    <hr style="background-color: rgba(0, 0, 0, 0.76); height: 1%;">
+    <br>
+    <center>
+        <h2> LATEST UPDATES </h2>
+    </center>
+    <br>
+
+    <br>
+</div>
+
+{% endblock content %}
