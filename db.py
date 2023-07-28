@@ -297,7 +297,6 @@ def ord_track(idt, temp_status):
     else:
         order['Status'] = temp_status
     order['Time'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    print(order)
     message = f"""From: From granthbagadia2004@gmail.com
     Subject: Tracking Details for {idt}
 
