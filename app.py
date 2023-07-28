@@ -13,8 +13,6 @@ from db import bill, mail, prod_qty, get_total, prod_id, search_prod
 from db import all_prod, update_product, save_product, updates
 from db import all_orders, ord_track, track_all, empty_cart, total_items
 
-gevent.monkey.patch_all(thread=False, select=False)
-
 app = Flask(__name__)
 app.secret_key = "granthbagadiagranthbagadia"
 socketio = SocketIO(app)
