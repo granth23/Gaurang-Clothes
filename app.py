@@ -1,4 +1,6 @@
 """Hi Audience"""
+import gevent.monkey
+gevent.monkey.patch_all(thread=False, select=False)
 
 from pymongo.errors import DuplicateKeyError
 from flask_login import LoginManager, login_user, current_user
@@ -6,7 +8,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
 from flask_socketio import SocketIO
 from flask import Flask, render_template, request, redirect, url_for, flash
-import gevent.monkey
 
 from db import get_user, save_user, update_cart, get_cart, set_qty
 from db import user_cart_prod, set_cart, status, add_info
@@ -15,7 +16,7 @@ from db import bill, mail, prod_qty, get_total, prod_id, search_prod
 from db import all_prod, update_product, save_product, updates
 from db import all_orders, ord_track, track_all, empty_cart, total_items
 
-gevent.monkey.patch_all()
+gevent.monkey.patch_all(thread=False, select=False)
 
 app = Flask(__name__)
 app.secret_key = "granthbagadiagranthbagadia"
