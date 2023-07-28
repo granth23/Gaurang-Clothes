@@ -45,8 +45,7 @@ class Info(FlaskForm):
 class Track(FlaskForm):
     """Hi Audience"""
     idt = StringField('Order ID')
-    ts = StringField('Tracking Service')
-    tid = StringField('Tracking Service')
+    status = StringField('Tracking Service')
     submit = SubmitField('Tracking ID')
 
 

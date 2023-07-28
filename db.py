@@ -292,8 +292,12 @@ def delete_products():
 def ord_track(idt, temp_status):
     """Hi Audience"""
     order = orders_collection.find_one({'_id': idt})
-    order['Status'] = temp_status
+    if temp_status is None:
+        order['Status'] = "None"
+    else:
+        order['Status'] = temp_status
     order['Time'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    print(order)
     message = f"""From: From granthbagadia2004@gmail.com
     Subject: Tracking Details for {idt}
 
