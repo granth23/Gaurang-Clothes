@@ -1,7 +1,4 @@
 """Hi Audience"""
-import gevent.monkey
-gevent.monkey.patch_all(thread=False, select=False)
-
 from pymongo.errors import DuplicateKeyError
 from flask_login import LoginManager, login_user, current_user
 from flask_wtf import FlaskForm
