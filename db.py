@@ -227,7 +227,7 @@ def add_info(email, name, phone, address):
 def mail(email, message):
     sender_email = "granthbagadia2004@gmail.com"
     rec_email = email
-    password = "vhvdnipfduglxqka"
+    password = "voxwlzjkgfiqhxve"
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login(sender_email, password)
