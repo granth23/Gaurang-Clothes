@@ -3,7 +3,6 @@ from pymongo.errors import DuplicateKeyError
 from flask_login import LoginManager, login_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
-from flask_socketio import SocketIO
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 from db import get_user, save_user, update_cart, get_cart, set_qty
@@ -15,7 +14,6 @@ from db import all_orders, ord_track, track_all, empty_cart, total_items
 
 app = Flask(__name__)
 app.secret_key = "granthbagadiagranthbagadia"
-socketio = SocketIO(app)
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
@@ -412,4 +410,4 @@ def load_user(email):
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    app.run(debug=True, port=3000)
