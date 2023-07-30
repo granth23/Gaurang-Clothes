@@ -175,18 +175,18 @@ def signup(temp_x):
             save_user(email)
             user = get_user(email)
             login_user(user)
-            return redirect(url_for('add', x=temp_x))
+            return redirect(url_for('add', temp_x=temp_x))
         except DuplicateKeyError:
             user = get_user(email)
             login_user(user)
-            return redirect(url_for('add', x=temp_x))
+            return redirect(url_for('add', temp_x=temp_x))
     return render_template('info.html', x=temp_x, t="signup")
 
 
 @app.route("/cart", methods=['GET', 'POST'])
 def cart():
     """Hi Audience"""
-    try:
+    if current_user.is_authenticated:
         current = current_user.email
         tamount = get_total(current)
         tqty = total_items(current)
@@ -218,8 +218,14 @@ def cart():
                 total_amount=tamount, total_qty=tqty)
         return render_template('cart.html', current=current, cart=temp_x,
             total_amount=tamount, total_qty=tqty)
-    except RuntimeError:
-        return redirect(url_for('home'))
+    return redirect(url_for('home'))
+
+@app.route('/SomeFunction', methods=['GET', 'POST'])
+def some_function():
+    """Hi Audience"""
+    print('In SomeFunction')
+    return "Nothing"
+
 
 
 @app.route("/<temp_x>", methods=['GET', 'POST'])
@@ -229,12 +235,12 @@ def products(temp_x):
         temp_products = list(all_products(temp_x))
         for i in temp_products:
             for j in i:
-                try:
+                if current_user.is_authenticated:
                     tag = j.get("_id")
                     cqty = user_cart_prod(
                         current_user.email, str(get_product(tag)['_id']))
                     j['cqty'] = cqty
-                except RuntimeError:
+                else:
                     j['cqty'] = 0
         cartx = []
         if current_user.is_authenticated:
@@ -254,8 +260,8 @@ def products(temp_x):
                                 item = f"{quantity}{i['_id']}"
                                 set_qty(current, item)
                                 return redirect(url_for('home'))
-        return render_template('products.html', lenproducts=len(products),
-            products=products, cart=cartx, x=temp_x)
+        return render_template('products.html', lenproducts=len(temp_products),
+            products=temp_products, cart=cartx, x=temp_x)
     elif temp_x in prod_id():
         if current_user.is_authenticated:
             cqty = user_cart_prod(current_user.email, temp_x)
@@ -263,15 +269,14 @@ def products(temp_x):
                 quantity = request.form.get('quantity')
                 temp_x = get_product(temp_x).get('_id')
                 quantity += str(temp_x)
-                return redirect(url_for('add', x=quantity))
+                return redirect(url_for('add', temp_x=quantity))
             return render_template('item.html', product=get_product(temp_x), cqty=cqty)
-        else:
-            if request.method == 'POST':
-                quantity = request.form.get('quantity')
-                temp_x = get_product(temp_x).get('_id')
-                quantity += str(temp_x)
-                return redirect(url_for('signup', x=quantity))
-            return render_template('item.html', product=get_product(temp_x), cqty=1)
+        if request.method == 'POST':
+            quantity = request.form.get('quantity')
+            temp_x = get_product(temp_x).get('_id')
+            quantity += str(temp_x)
+            return redirect(url_for('signup', temp_x=quantity))
+        return render_template('item.html', product=get_product(temp_x), cqty=1)
     return render_template('505.html')
 
 
@@ -282,7 +287,7 @@ def add(temp_x):
         update_cart(current_user.email, temp_x)
         flash("Item Added Successfully")
         return redirect(url_for('cart'))
-    return redirect(url_for('signup', x=temp_x))
+    return redirect(url_for('signup', temp_x=temp_x))
 
 
 @app.route("/pay", methods=['GET', 'POST'])
@@ -389,7 +394,7 @@ def check_order():
     return render_template('check_order.html', orders=track_all(), products=all_prod())
 
 
-@app.route("/track_order", methods=['GET', 'POST'])
+@app.route("/track-order", methods=['GET', 'POST'])
 def track_order():
     """Hi Audience"""
     orders = all_orders()
