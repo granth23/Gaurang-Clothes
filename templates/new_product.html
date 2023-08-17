@@ -1,67 +1,44 @@
-{% extends "layout2.html" %}
+{% extends "layout3.html" %}
 {% block content %}
 
-<div class="box">
-    <h1>New Product</h1>
-    <br>
-    <form method="POST" action="{{ url_for('new_prod') }}">
-        {{ form.hidden_tag() }}
-        <div class="row">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:45%" ,
-                name="category" , placeholder="Category">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:35px" value=""
-                disabled>
-            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:45%" , name="name"
-                , placeholder="Name">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:30px" value=""
-                disabled>
-            <button class="btn" style="border-color: black; color:#000 ; border-radius:0px;" type="submit">
-                <i class="fa fa-check"></i></button>
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-        </div>
-        <div class="row">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:32%" , name="mrp" ,
-                placeholder="MRP">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:32%" , name="srp" ,
-                placeholder="SRP">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:30%" ,
-                name="quantity" , placeholder="Quantity">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-        </div>
-        <div class="row">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-            <input class="btn" style="text-align:left; border-color: black; border-radius:0px; width:98%" , name="image"
-                , placeholder="Image URL">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-        </div>
-        <div class="row">
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-                disabled>
-            <textarea class="btn" name="info"
-                style="text-align:left; border-color: black; width:98%; height:200px; padding: 20px" ,
-                placeholder=""></textarea>
-            <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" disabled>
-        </div>
-    </form>
-    <div class="row">
-        <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-            disabled>
-        <input class="btn" style="border-color: black; border-radius:0px; width:98%" , value="{{message}}" disabled>
-        <input class="btn" style="border-color: black; border-radius:0px; visibility: hidden; width:10px" value=""
-            disabled>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='new_product.css') }}">
+
+<section class="latest">
+  <h1 class="latest-title">Latest Products</h1>
+</section>
+<form method="POST" action="{{ url_for('new_prod') }}" class="form_new">
+
+  <div class="boxa">
+    <input list="category" name="category" placeholder="Category" style="width: 46%;" required>
+    <datalist id="category">
+      <option value="Shirts">
+      <option value="Tees">
+      <option value="Caps">
+      <option value="Pendants">
+      <option value="Rings">
+    </datalist>
+
+    <input name="name" type="text" placeholder="Name" style="width: 46%">
+
+  </div>
+  <div class="boxb">
+    <input name="mrp" type="number" placeholder="MRP" style="width: 30.3%" required>
+    <input name="srp" type="number" placeholder="SRP" style="width: 30.3%" required>
+    <input name="quantity" type="number" placeholder="Quantity" style="width: 30.3%" required>
+  </div>
+  <div class="boxc" style="width: 100%;">
+    <div class="boxd" style="width: 46%;">
+      <input name="url1" type="url" placeholder="Image URL 1" required>
+      <input name="url2" type="url" placeholder="Image URL 2" required>
+      <input name="url3" type="url" placeholder="Image URL 3" required>
     </div>
-</div>
+    <textarea name="info" type="text" placeholder="Description" class="desc" style="width: 46%; height: 90%;" required></textarea>
+  </div>
+
+
+
+  <input type="submit" class="submit">
+
+</form>
 
 {% endblock content %}

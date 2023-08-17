@@ -28,8 +28,6 @@
         </ul>
         <ul class="navbar-nav" style="color:white;">
             <li class="nav-item">
-                <i class="fa fa-clock-o">&nbsp;</i> {{ status }} &nbsp;&nbsp;
-                | &nbsp;&nbsp;
                 <i class="fa fa-phone"> &nbsp; </i>+918048034625 &nbsp;
             </li>
         </ul>
@@ -42,8 +40,7 @@
             <div class="d-inline-block" style="margin-top:3px">&nbsp; Bootstrap</div>
         </a>
         <div class="navbar-item topf">
-            <form method="POST" action="{{ url_for('search') }}" class="d-flex">
-                {{ form.hidden_tag() }}
+            <form method="POST" class="d-flex">
                 <input class="form-control ml search searchbtn" style="border-color: white; border-radius:0px; ""
                     type=" search" placeholder="Search" ,aria-label="Search" , name="search">
                 <button class="btn searchbtn" style="border-color: white; color:white; border-radius:0px;"
@@ -89,7 +86,7 @@
         <a class="nav-link" href="/DIGITAL">DIGITAL</a>
         <a class="nav-link" href="/SURFACE">SURFACE</a>
         <a class="nav-link" href="/contact-us">CONTACT US</a>
-        <a class="nav-link" href="/track-order">TRACK ORDER</a>
+        <a class="nav-link" href="/track_order">TRACK ORDER</a>
     </nav>
     <a id="button"></a>
     <script src="./static/script.js"></script>
@@ -100,17 +97,7 @@
     {% block content %}{% endblock %}
 </body>
 
-<style>
-    .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: rgb(24, 27, 70);
-        color: white;
-        text-align: center;
-    }
-</style>
+
 
 <div class="footer">
     <div class="container">

@@ -18,21 +18,19 @@
     <h1>Tracking Details</h1>
     <br>
     {% for i in orders %}
-    <div class="d-flex">
+    <form method="POST" class="d-flex">
         <input class="btn" style="border-color: black; border-radius:0px; width:5px; visibility: hidden" ,
             aria-label="Search" , name="idt" value="{{i.get('_id')}}">
         &nbsp;&nbsp;
-        <div style="border: 1px solid #000; padding: 10px; padding-left: 25px; padding-right: 25px;">
+        <div style="border: 1px solid #000; padding-top: 10px; padding-left: 25px; padding-right: 25px;">
             {% for j in i.get('cart') %}
             {% for k in products %}
-            <div class="row" style="width:150px">
+            <div class="row">
                 {% if j.get('_id') == k.get('_id') %}
                 <img class="iii" src={{k.get('image')}} style="width:50px; margin-bottom: 10px;" class="example">
                 &nbsp;&nbsp;
-                <div style="word-break: break-word;">
+                <div style="margin-top:7px">
                     <center>
-                        {{k.get('category')}}
-                        <br>
                         {{k.get('name')}}
                         <br>
                         QTY: {{j.get('cqty')}}
@@ -52,21 +50,26 @@
             {{i.get('phone')}}
         </span>
         &nbsp;&nbsp;
-        <span class="example" style="width:225px">
+        <span class="example" style="width:250px">
             {{i.get('address')}}
         </span>
         &nbsp;&nbsp;
-        <span class="example" style="width:100px">
+        <span class="example">
             INR: {{i.get('amount')}}
         </span>
-    </div>
+        &nbsp;&nbsp;
+        <span class="example">
+            {{i.get('Service')}}
+        </span>
+        &nbsp;&nbsp;
+        <span class="example" style="width:200px">
+            {{i.get('Tracking ID')}}
+        </span>
+        &nbsp;&nbsp;
+    </form>
+
     <br>
     {% endfor %}
-
-</div>
-<br>
-
-
 </div>
 
 {% endblock content %}

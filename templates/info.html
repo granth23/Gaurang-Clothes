@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
 
-{% if t == "info" %}
 
 <div class="box">
     <center>
@@ -31,28 +30,5 @@
         </ul>
     </form>
 </div>
-
-{% elif t == "signup" %}
-
-<div class="box">
-    <form class='formi' method="post" action="/sign-up/{{x}}">
-        <center>
-            <h2> Please Enter your E-Mail ID
-            </h2>
-        </center>
-        <br>
-        <ul>
-            <li>
-                <input class="textareatt" type="email" id="email" name="email" required="required"
-                    style="margin-bottom:10px">
-            </li>
-            <li>
-                <input class="textareatt pointer" style="background-color: #102a43;" type="submit">
-            </li>
-        </ul>
-    </form>
-</div>
-
-{% endif %}
 
 {% endblock content %}

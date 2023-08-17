@@ -1,0 +1,120 @@
+#boxes{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#leftbox {
+    float: left;
+    /* background: Red; */
+    width: 60%;
+    padding: 1%;
+}
+
+#rightbox {
+    float: right;
+    /* background: blue; */
+    width: 40%;
+    padding: 3%;
+}
+
+.latest {
+    width: 100%;
+    display: flex;
+    padding-top: 30px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.latest-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.latest-block {
+    width: 360px;
+    height: 580px;
+    background: rgb(198,78,201);
+    background: linear-gradient(0deg, rgba(198,78,201,1) 0%, rgba(116,118,251,1) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+    position: relative;
+    transition:  ease 0.3s;
+    margin-bottom: 30px;
+    top: 0px;
+    cursor: pointer;
+    &:hover {
+        top: -20px;
+    }
+}
+
+.latest-content {
+    width: 350px;
+    height: 570px;
+    background-color: #000;
+    border-radius: 11px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.latest-img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    object-position: 0 0%;
+}
+
+.latest-name {
+    font-size: 25px;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.latest-price {
+    color: #616161;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.latest-buy {
+    background: rgb(198,78,201);
+    background: linear-gradient(90deg, rgba(198,78,201,1) 0%, rgba(116,118,251,1) 100%);
+    transition: 0.3s;
+    color: #fff;
+    margin-bottom: 25px;
+    padding: 8px 75px;
+    border-radius: 10px;
+    &:hover {
+        color: #dddddd;
+    }
+    text-align:center;
+    border: 3px solid #ff37b2;
+}
+
+.gold-price {
+    background: -webkit-linear-gradient(0deg, #fffb03,#ffbb00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 80px;
+}
+
+.cart-form {
+    background: black;
+    border: 3px solid #ff37b2;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 10px;
+}

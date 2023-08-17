@@ -5,58 +5,69 @@
     <h1>Update Tracking Details</h1>
     <br>
     {% for i in orders %}
-    <form method="POST" action="{{ url_for('add_track') }}" class="d-flex">
-        {{ form.hidden_tag() }}
-        <input class="btn" style="border-color: black; border-radius:0px; width:5px; visibility: hidden" ,
-            aria-label="Search" , name="idt" value="{{i.get('_id')}}">
-        &nbsp;&nbsp;
-        <div style="border: 1px solid #000; padding: 10px; padding-left: 25px; padding-right: 25px;">
-            {% for j in i.get('cart') %}
-            {% for k in products %}
-            <div class="row" style="width:150px">
-                {% if j.get('_id') == k.get('_id') %}
-                <img class="iii" src={{k.get('image')}} style="width:50px; margin-bottom: 10px;" class="example">
-                &nbsp;&nbsp;
-                <div style="word-break: break-word;">
-                    <center>
-                        {{k.get('category')}}
-                        <br>
-                        {{k.get('name')}}
-                        <br>
-                        QTY: {{j.get('cqty')}}
-                    </center>
+    <div class="d-flex">
+        <form method="POST" action="{{ url_for('add_track') }}" class="d-flex">
+            {{ form.hidden_tag() }}
+            <input class="btn" style="border-color: black; border-radius:0px; width:5px; visibility: hidden" ,
+                aria-label="Search" , name="idt" value="{{i.get('_id')}}">
+            &nbsp;&nbsp;
+            <div style="border: 1px solid #000; padding: 10px; padding-left: 25px; padding-right: 25px;">
+                {% for j in i.get('cart') %}
+                {% for k in products %}
+                <div class="row" style="width:150px">
+                    {% if j.get('_id') == k.get('_id') %}
+                    <img class="iii" src={{k.get('image')}} style="width:50px; margin-bottom: 10px;" class="example">
+                    &nbsp;&nbsp;
+                    <div style="word-break: break-word;">
+                        <center>
+                            {{k.get('category')}}
+                            <br>
+                            {{k.get('name')}}
+                            <br>
+                            QTY: {{j.get('cqty')}}
+                        </center>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
+                {% endfor %}
+                {% endfor %}
             </div>
-            {% endfor %}
-            {% endfor %}
-        </div>
+            &nbsp;&nbsp;
+            <span class="example">
+                {{i.get('name')}}
+            </span>
+            &nbsp;&nbsp;
+            <span class="example">
+                {{i.get('phone')}}
+            </span>
+            &nbsp;&nbsp;
+            <span class="example" style="width:225px">
+                {{i.get('address')}}
+            </span>
+            &nbsp;&nbsp;
+            <span class="example" style="width:100px">
+                INR: {{i.get('amount')}}
+            </span>
+            &nbsp;&nbsp;
+            <input class="btn" style="border-color: black; border-radius:0px;" type="search" placeholder="Search" ,
+                aria-label="Search" , name="status" , value="{{i.get('Status')}}">
+            &nbsp;&nbsp;
+            <button class="btn" style="border-color: black; color:#000 ; border-radius:0px; width:50px" type="submit">
+                <i class="fa fa-check"></i></button>
+        </form>
         &nbsp;&nbsp;
-        <span class="example">
-            {{i.get('name')}}
-        </span>
-        &nbsp;&nbsp;
-        <span class="example">
-            {{i.get('phone')}}
-        </span>
-        &nbsp;&nbsp;
-        <span class="example" style="width:225px">
-            {{i.get('address')}}
-        </span>
-        &nbsp;&nbsp;
-        <span class="example" style="width:100px">
-            INR: {{i.get('amount')}}
-        </span>
-        &nbsp;&nbsp;
-        <input class="btn" style="border-color: black; border-radius:0px;" type="search" placeholder="Search" ,
-            aria-label="Search" , name="status", value="{{i.get('Status')}}">
-        &nbsp;&nbsp;
-        <button class="btn" style="border-color: black; color:#000 ; border-radius:0px; width:50px" type="submit">
+        <button class="btn" style="border-color: black; color:#000 ; border-radius:0px; width:50px" type="submit" onclick='redirect("/delivered/{{i.get('_id')}}")'>
             <i class="fa fa-check"></i></button>
-    </form>
-
+    </div>
     <br>
     {% endfor %}
 </div>
+
+<script>
+    function redirect(i) {
+        window.location.href = "http://127.0.0.1:3000/" + i;
+    }
+
+</script>
 
 {% endblock content %}

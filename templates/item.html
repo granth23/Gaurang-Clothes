@@ -1,58 +1,53 @@
-{% extends "layout.html" %}
+{% extends "layout3.html" %}
 {% block content %}
 
-<div class="box">
-    <div class="row">
-        <div class="imge">
-            <img class="iii" src={{product.get('image')}}>
-        </div>
-        <div class="deta">
-            <h3>{{product.get('category') + " " + product.get('name')}}</h3>
-            <br>
-            {% if product.get('srp') == product.get('mrp') %}
-            {{product.get('srp')}}
-            {% else %}
-            INR {{product.get('srp')}} &nbsp;
-            <strike>INR {{product.get('mrp')}}</strike>
-            {% endif %}
-            <p>{{product.get('info')}}</p>
-            <br>
-            <form style="margin-top: -5px;" method="POST" action="/{{product.get('_id')}}" class="d-flex upqty">
-                {% if product.get('quantity') > 5 %}
-                <input class="ml" type="number" id="quantity" name="quantity" min="0" max={{5}} value={{cqty}}
-                    style="text-align: center; border: 1px solid black; width: 70%; height: 40px">
-                &nbsp;&nbsp;&nbsp;
-                <button type="submit" style="border: 1px solid black; width: 30%; ; height: 40px"><i
-                        class="fa fa-check pointer"></i></button>
-                {% else %}
-                <input class="ml" type="number" id="quantity" name="quantity" min="0" max={{product.get('quantity')}}
-                    value={{cqty}} style="text-align: center; border: 1px solid black; width: 70%; height: 40px">
-                &nbsp;&nbsp;&nbsp;
-                <button type="submit" style="width: 30%; height: 40px; border: 1px solid black;"><i
-                        class="fa fa-check pointer"></i></button>
-                {% endif %}
-            </form>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='item.css') }}">
+
+<section class="item-flex">
+    <div class="gallery">
+        {% for i in range(img_len) %}
+        <img class="gallery-img" src="{{product.get('image')[i]}}" onclick="gallery({{i}})">
+        {% endfor %}
+    </div>
+    <div class="photo">
+        <div class="photo-div">
+            <img class="photo-img" src="{{product.get('image')[0]}}" id="gallery-photo">
         </div>
     </div>
-</div>
+    <div class="details">
+        <div class="sub-title">{{product.get('category')}}</div>
+        <div class="title">{{product.get('name')}}</div>
+        <div class="price">
+            {% if product.get('srp') == product.get('mrp') %}
+            <span class="gold-price">INR {{product.get('srp')}}</span>
+            {% else %}
+            <span class="gold-price">INR {{product.get('srp')}}</span>
+            &nbsp;&nbsp;&nbsp; <!-- adds space -->
+            <span style="text-decoration: line-through;">INR {{product.get('mrp')}}</span>
+            {% endif %}
+        </div>
+        <div class="buy">Add to Cart</div>
+    </div>
+</section>
 
 <script>
-    var cqty = {{ cqty }};
-    var lcqty = {{ product.get('quantity') }}
-    if (cqty < 5) {
-        console.log("ncfffbdhcbdh")
-        document.getElementById("addtomin").style.visibility = 'hidden';
-        document.getElementById("addtomax").style.visibility = 'visible';
+    window.onload = function(){resize()};
+    function gallery(i) {
+        document.getElementById("gallery-photo").src = document.getElementsByClassName("gallery-img")[i].src;
+        resize();
     }
-    if (cqty == 5) {
-        console.log("ncfffndhncd")
-        document.getElementById("addtomax").style.visibility = 'hidden';
-        document.getElementById("addtomin").style.visibility = 'visible';
-    }
-    if (cqty == lcqty) {
-        console.log("ncfff")
-        document.getElementById("addtomax").style.visibility = 'hidden';
-        document.getElementById("addtomin").style.visibility = 'visible';
+    function resize() {
+        var h = document.getElementById("gallery-photo").naturalHeight;
+        var w = document.getElementById("gallery-photo").naturalWidth;
+        if (h>=w) {
+            document.getElementById("gallery-photo").style.height = "100%";
+            document.getElementById("gallery-photo").style.width = "auto";
+        }
+        else if (h<w) {
+            document.getElementById("gallery-photo").style.height = "auto";
+            document.getElementById("gallery-photo").style.width = "100%";
+        }
+
     }
 </script>
 

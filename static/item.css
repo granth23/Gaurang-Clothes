@@ -1,0 +1,116 @@
+/* ITEM PART */
+
+.item-flex {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 100px 0px 100px;
+}
+
+.gallery {
+    height: 100%;
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-img {
+    width: 80%;
+    height: auto;
+    margin: 20px 0px;
+    border-radius: 10px;
+}
+
+.photo {
+    height: 100%;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-div {
+    /* border-radius: 20px; */
+    overflow: hidden;
+    height: 80%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-img {
+    width:100%;
+    height:100%;
+}
+
+.details {
+    height: 100%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+}
+
+
+.sub-title {
+    font-size: 30px;
+    color: rgb(131, 131, 131);
+    margin-bottom: 0px;
+    width: 540px;
+}
+
+.title {
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+    width: 540px;
+    margin-bottom: 15px;
+    word-spacing: 10px;
+}
+
+.price {
+    color: #616161;
+    font-size: 35px;
+    width: 540px;
+    margin-bottom: 40px;
+}
+.gold-price {
+    background: -webkit-linear-gradient(0deg, #fffb03,#ffbb00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.desc {
+    font-size: 20px;
+    color: rgb(196, 196, 196);
+    width: 520px;
+    margin-bottom: 40px;
+}
+
+.buy {
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 15px 30px;
+    background: rgb(198,78,201);
+    background: linear-gradient(90deg, rgba(198,78,201,1) 0%, rgba(116,118,251,1) 100%);
+    background: linear-gradient(90deg, #fffb03 0%, #ffbb00 100%);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 12px;
+    transition: 0.3s;
+
+    &:hover {
+        color: #3d3d3d;
+    }
+}

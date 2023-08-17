@@ -9,9 +9,8 @@ from pymongo.mongo_client import MongoClient
 
 from user import User
 
-country_time_zone = pytz.timezone('Asia/Kolkata')
-CLIENT_URL = "mongodb+srv://test:test@cluster0.nrvnm.mongodb.net/"
-client = MongoClient(CLIENT_URL+"myFirstDatabase?retryWrites=true&w=majority")
+CLIENT_URL = "mongodb+srv://test:test@campus-chic.zztvvcb.mongodb.net/"
+client = MongoClient(CLIENT_URL+"?retryWrites=true&w=majority")
 
 ecom = client.get_database("GamesTrade")
 users_collection = ecom.get_collection("users")
@@ -19,6 +18,7 @@ products_collection = ecom.get_collection("products")
 orders_collection = ecom.get_collection("orders")
 info_collection = ecom.get_collection("info")
 track_collection = ecom.get_collection("track")
+updates_collection = ecom.get_collection("updates")
 
 
 def get_user(email):
@@ -66,46 +66,22 @@ def get_product_id(tag):
         if tag == name:
             return temp_var
 
-
-def update_cart(email, item):
-    """Hi Audience"""
+def add_into_cart(email, item):
+    "Add item to cart"
     _id = email.split("@")[0]
     cart = get_cart(email)
-    temp_var = 0
-    pfront = int(item[:-16])
-    ucart = {}
-    pback = int(get_product_id(item[-16:])['quantity'])
+    cart.append({'_id': item, 'cqty': 1})
+    users_collection.update_one({'_id': _id}, {"$set": {'cart': cart}})
+
+
+def remove_from_cart(email, item):
+    "Add item to cart"
+    _id = email.split("@")[0]
+    cart = get_cart(email)
     for i in cart:
-        if str(i['_id']) == item[-16:]:
-            ucart = i
-        else:
-            temp_var += 1
-    if temp_var == len(cart):
-        if pfront >= 5:
-            if pfront >= pback:
-                if pback >= 5:
-                    cart.append({'_id': item[-16:], 'cqty': 5})
-                else:
-                    cart.append({'_id': item[-16:], 'cqty': pback})
-            else:
-                cart.append({'_id': item[-16:], 'cqty': 5})
-        elif pfront < 5:
-            if pfront >= pback:
-                cart.append({'_id': item[-16:], 'cqty': pback})
-            else:
-                cart.append({'_id': item[-16:], 'cqty': pfront})
-    else:
-        cart.remove(ucart)
-        final = pfront
-        if final >= 5:
-            if pback >= 5:
-                ucart['cqty'] = 5
-            if pback < 5:
-                ucart['cqty'] = pback
-            cart.append(ucart)
-        elif final < 5:
-            ucart['cqty'] = final
-            cart.append(ucart)
+        if str(i['_id']) == item:
+            cart.remove(i)
+            break
     users_collection.update_one({'_id': _id}, {"$set": {'cart': cart}})
 
 
@@ -123,16 +99,6 @@ def set_qty(email, item):
         else:
             pass
     users_collection.update_one({'_id': _id}, {"$set": {'cart': cart}})
-
-
-def status():
-    """Hi Audience"""
-    if datetime.today().weekday() < 7:
-        hour = datetime.now(country_time_zone).strftime("%H:%M:%S")[0:2]
-        if int(hour) >= 9 and int(hour) <= 19:
-            return "Open Now"
-        return "Closed Now"
-    return "Closed Now"
 
 
 def prod_names():
@@ -169,6 +135,16 @@ def all_products(category):
         yield temp_list[i:i + 20]
 
 
+def test_all():
+    """Hi Audience"""
+    all_p = [[],[],[],[]]
+    for i in range(1,4):
+        all_p[i] = list(all_products('PS4'))[0]
+    all_p[0] = list(all_products('PS5'))[0]
+    all_p[2] = list(all_products('PS5'))[0]
+    return all_p
+
+
 def get_total(email):
     """Hi Audience"""
     cart = get_cart(email)
@@ -179,23 +155,6 @@ def get_total(email):
     return total
 
 
-def set_cart(email):
-    """Hi Audience"""
-    _id = email.split("@")[0]
-    cart = get_cart(email)
-    for i in cart:
-        back_qty = get_product_id(i['_id'])['quantity']
-        if back_qty <= i['cqty']:
-            if back_qty >= 5:
-                i['cqty'] = 5
-            elif back_qty < 5:
-                if back_qty != 0:
-                    i['cqty'] = back_qty
-                else:
-                    cart.remove(i)
-    users_collection.update_one({'_id': _id}, {"$set": {'cart': cart}})
-
-
 def gen_id(temp_varl):
     """Hi Audience"""
     temp_var = ''.join((random.choice(string.ascii_uppercase) for x in range(temp_varl)))
@@ -204,13 +163,13 @@ def gen_id(temp_varl):
 
 def bill(email):
     """Hi Audience"""
-    for i in info_collection.find({'_id': email.split("@")[0]}):
-        info_collection.delete_one({'_id': email.split("@")[0]})
+    for i in info_collection.find({'_id': email}):
+        info_collection.delete_one({'_id': email})
         idt = gen_id(16)
         temp_order = {'_id': idt, 'name': i.get('name'), 'phone': i.get('phone'), 'address': i.get(
             'address'), 'cart': get_cart(email), 'email': email, 'amount': get_total(email)}
         orders_collection.insert_one(temp_order)
-        return idt
+        return idt, i['email']
 
 
 def prod_qty(idt):
@@ -233,7 +192,7 @@ def empty_cart(email):
     users_collection.update_one({'_id': _id}, {"$set": {'cart': cart}})
 
 
-def add_info(email, name, phone, address):
+def add_info(curr_id, email, name, phone, address):
     """Hi Audience"""
     temp_y = 0
     temp_x = 0
@@ -242,24 +201,23 @@ def add_info(email, name, phone, address):
         if email == i.get('_id'):
             temp_x += 1
     if temp_x != temp_y:
-        info_collection.delete_one({'_id': email.split("@")[0]})
-        info_collection.insert_one({'_id': email.split(
-            "@")[0], 'email': email, 'name': name, 'phone': phone, 'address': address})
+        info_collection.delete_one({'_id': curr_id})
+        info_collection.insert_one({'_id': curr_id, 'email': email, 'name': name, 'phone': phone, 'address': address})
     else:
-        info_collection.insert_one({'_id': email.split(
-            "@")[0], 'email': email, 'name': name, 'phone': phone, 'address': address})
+        info_collection.insert_one({'_id': curr_id, 'email': email, 'name': name, 'phone': phone, 'address': address})
 
 
 def mail(email, message):
     """Hi Audience"""
     sender_email = "granthbagadia2004@gmail.com"
     rec_email = email
-    password = "voxwlzjkgfiqhxve"
+    password = "fokejjwavrejtchi"
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login(sender_email, password)
     server.sendmail(sender_email, rec_email, message)
 
+# mail("granthbagadia2004@gmail.com", "cbdhjcdbnh")
 
 def save_product(category, name, quantity, mrp, srp, image, info):
     """Hi Audience"""
@@ -334,17 +292,31 @@ def track_all():
 def total_items(email):
     """Hi Audience"""
     temp_var = 0
-    set_cart(email)
     cart = get_cart(email)
     for i in cart:
         temp_var += i.get('cqty')
     return temp_var
 
 
-def updates():
+def latest_prod(email=None):
     """Hi Audience"""
     temp_var = []
     for i in products_collection.find({}):
+        i['cqty'] = 0
+        if email != None:
+            cart = get_cart(email)
+            for j in cart:
+                if j['_id'] == i['_id']:
+                    i['cqty'] = j['cqty']
+        temp_var.append(i)
+    temp_var = temp_var[-4:]
+    return temp_var
+
+
+def all_updates():
+    """Hi Audience"""
+    temp_var = []
+    for i in updates_collection.find({}):
         temp_var.append(i)
     temp_var = temp_var[-4:]
     return temp_var
