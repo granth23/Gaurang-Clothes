@@ -20,7 +20,7 @@ login_manager.login_view = 'login'
 login_manager.init_app(app)
 
 
-tags = ['Tees', 'Shirts', 'XBOX X', 'XBOX-1', 'SURFACE', 'ACCESSORIES', 'NINTENDO']
+tags = ['Tees', 'Shirts', 'XBOX X', 'XBOX-1', 'SURFACE', 'Accessories', 'NINTENDO']
 
 
 class New(FlaskForm):
@@ -73,14 +73,20 @@ class TrackOrder(FlaskForm):
     order_id = StringField('Order ID')
 
 
+class Search(FlaskForm):
+    search = StringField('Search')
+    submit = SubmitField('Submit')
+
+
 @app.context_processor
 def base():
     """Hi Audience"""
+    form = Search()
     if current_user.is_authenticated:
         tqty = total_items(current_user.email)
     else:
         tqty = 0
-    return dict(total_qty=tqty)
+    return dict(total_qty=tqty, form=form)
 
 
 @app.route("/")
@@ -95,6 +101,45 @@ def home():
     updates = all_updates()
     updates.reverse()
     return render_template('home.html', latest_prod=latest_products, updates=updates)
+
+
+
+@app.route("/search", methods=['GET', 'POST'])
+def search():
+    form = Search()
+    if form.validate_on_submit:
+        search_data = form.search.data
+        products = list(search_prod(search_data))
+        search_data = f"You Searched for {search_data}"
+        for i in products:
+            for j in i:
+                try:
+                    tag = j.get("_id")
+                    cqty = user_cart_prod(current_user.email, str(get_product(tag)['_id']))
+                    j['cqty'] = cqty
+                except:
+                    j['cqty'] = 0
+        cartx = []
+        if current_user.is_authenticated:
+            current = current_user.email
+            set_cart(current)
+            cart = get_cart(current_user.email)
+            for i in cart:
+                ut = get_product_id(i['_id'])
+                ut['cqty'] = i['cqty']
+                cartx.append(ut)
+                for i in cart:
+                    if request.method == 'POST':
+                        quantity = request.form.get(f'quantity{cart.index(i)}')
+                        if quantity is not None:
+                            quantity = int(quantity)
+                            if quantity != i['cqty']:
+                                item = f"{quantity}{i['_id']}"
+                                set_qty(current, item)
+                                return redirect(url_for('home'))
+        return render_template('products.html', lenproducts=len(products), products=products, cart = cartx, x = search_data)
+    else:
+        return render_template('home.html')
 
 
 @app.route("/contact", methods=['GET', 'POST'])

@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games Trade</title>
+    <title>Campus Chic</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='layout3.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
             <a href="/">
                 <img src="{{url_for('static', filename='assets/logo.png')}}" alt="slide image" class="slide">
                 <div class="logo-text">
-                    <div>Campus</div>
+                    <div style="font-weight: 500;">Campus</div>
                     <div class="logo-trade">Chic</div>
                 </div>
             </a>
@@ -26,18 +27,21 @@
         <div class="links">
             <a href="/Shirts"><div class="nav-links">Shirts</div></a>
             <a href="/Tees"><div class="nav-links">Tees</div></a>
-            <a href="#"><div class="nav-links">Caps</div></a>
-            <a href="#"><div class="nav-links">Pendants</div></a>
-            <a href="#"><div class="nav-links">Rings</div></a>
-            <a href="/track_order"><div class="nav-links">Track order</div></a>
-            <a href="/PS4"><div class="nav-links">Playstation 4</div></a>
+            <a href="/Accessories"><div class="nav-links">Accessories</div></a>
         </div>
+        <form method="POST" class="search" action="{{ url_for('search') }}">
+            <input class="form-control ml search searchbtn"  type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn searchbtn" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
         <div class="cart">
             <a href="/cart">
                 <span class="fa-stack fa-2x has-badge cartbtn" data-count="{{total_qty}}" href="/cart">
                     <i content="5" class="fa fa-shopping-cart fa-stack-1x fa-inverse cart-num"></i>
                 </span>
             </a>
+            <a href="/track_order"><div class="nav-links">Track order</div></a>
         </div>
 
     </header>
@@ -49,14 +53,6 @@
     </center>
     <footer class="footer">
         <div class="footer-flex">
-            <div class="footer-col" style="width:25%">
-                <div class="x-us">
-                    <span class="x-us-title">Follow us</span>
-                </div>
-                <div class="x-us-line"></div>
-                <div class="footer-details">9876543210</div>
-                <div class="footer-details">9876543210</div>
-            </div>
 
             <div class="footer-col" style="width:50%">
                 <div class="x-us">
@@ -67,7 +63,7 @@
                 <div class="footer-details">f20220217@hyderabad.bits-pilani.ac.in</div>
             </div>
 
-            <div class="footer-col" style="width:25%">
+            <div class="footer-col" style="width:50%">
                 <div class="x-us">
                     <span class="x-us-title">Call us</span>
                 </div>

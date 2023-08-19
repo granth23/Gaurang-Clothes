@@ -12,7 +12,7 @@ from user import User
 CLIENT_URL = "mongodb+srv://test:test@campus-chic.zztvvcb.mongodb.net/"
 client = MongoClient(CLIENT_URL+"?retryWrites=true&w=majority")
 
-ecom = client.get_database("GamesTrade")
+ecom = client.get_database("Campus-Chic")
 users_collection = ecom.get_collection("users")
 products_collection = ecom.get_collection("products")
 orders_collection = ecom.get_collection("orders")
