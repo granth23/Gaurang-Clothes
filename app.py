@@ -214,7 +214,7 @@ def product(temp_x):
             cqty = user_cart_prod(current_user.email, temp_x)
         else:
             cqty = 1
-        return render_template('item.html', product=get_product(temp_x), cqty=cqty, img_len = len(get_product(temp_x)['image']))
+        return render_template('item.html', product=get_product(temp_x), cqty=cqty)
     return render_template('505.html')
 
 
@@ -315,10 +315,9 @@ def new_prod():
         srp = form.srp.data
         temp_info = form.info.data
         quantity = form.quantity.data
-        url1 = form.url1.data
-        url2 = form.url2.data
-        url3 = form.url3.data
-        image = [url1, url2, url3]
+        url1 = f"https://drive.google.com/uc?id={form.url1.data}"
+        url2 = f"https://drive.google.com/uc?id={form.url2.data}"
+        image = [url1, url2]
         message = save_product(category, name, quantity, mrp, srp, image, temp_info)
         return render_template('new_product.html', products=all_prod(), form=form, message=message)
     return render_template('new_product.html', products=all_prod(),

@@ -5,9 +5,8 @@
 
 <section class="item-flex">
     <div class="gallery">
-        {% for i in range(img_len) %}
-        <img class="gallery-img" src="{{product.get('image')[i]}}" onclick="gallery({{i}})">
-        {% endfor %}
+        <img class="gallery-img" src="{{product.get('image')[0]}}" onclick="gallery(0)">
+        <img class="gallery-img" src="{{product.get('image')[1]}}" onclick="gallery(1)">
     </div>
     <div class="photo">
         <div class="photo-div">
