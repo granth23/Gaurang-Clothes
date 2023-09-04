@@ -12,7 +12,7 @@
         <button class="btn" style="border-color: black; color:#000 ; border-radius:0px; width:150px" type="submit"
             disabled>
             {{ products.index(i) + 1 }}</button>
-        <img class="iii" src={{i.get('image')}} style="width:175px; border: 1px solid #000; padding: 2px">
+        <img class="iii" src={{i.get('image')[0]}} style="width:175px; border: 1px solid #000; padding: 2px">
         <input class="btn" style="border-color: black; border-radius:0px;"
             value="{{ i.get('category') }} {{ i.get('name') }}" disabled>
         <input class="btn" style="border-color: black; border-radius:0px;" type="search" placeholder="Search"

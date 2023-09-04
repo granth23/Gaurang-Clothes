@@ -296,14 +296,6 @@ def home_admin():
     return render_template('home2.html')
 
 
-@app.route("/new_product", methods=['GET', 'POST'])
-def new_product():
-    """Hi Audience"""
-    form = New()
-    return render_template('new_product.html', products=all_prod(),
-        form=form, message="Hello There")
-
-
 @app.route("/new_prod", methods=['GET', 'POST'])
 def new_prod():
     """Hi Audience"""

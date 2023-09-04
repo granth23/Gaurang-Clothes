@@ -16,7 +16,7 @@
                 {% for k in products %}
                 <div class="row" style="width:150px">
                     {% if j.get('_id') == k.get('_id') %}
-                    <img class="iii" src={{k.get('image')}} style="width:50px; margin-bottom: 10px;" class="example">
+                    <img class="iii" src={{k.get('image')[0]}} style="width:50px; margin-bottom: 10px;" class="example">
                     &nbsp;&nbsp;
                     <div style="word-break: break-word;">
                         <center>
