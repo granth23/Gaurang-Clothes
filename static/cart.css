@@ -1,4 +1,4 @@
-#boxes{
+#boxes {
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -38,18 +38,19 @@
 .latest-block {
     width: 360px;
     height: 580px;
-    background: rgb(198,78,201);
-    background: linear-gradient(0deg, rgba(198,78,201,1) 0%, rgba(116,118,251,1) 100%);
+    background: rgb(198, 78, 201);
+    background: linear-gradient(0deg, rgba(198, 78, 201, 1) 0%, rgba(116, 118, 251, 1) 100%);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 15px;
     position: relative;
-    transition:  ease 0.3s;
+    transition: ease 0.3s;
     margin-bottom: 30px;
     top: 0px;
     cursor: pointer;
+
     &:hover {
         top: -20px;
     }
@@ -88,22 +89,24 @@
 }
 
 .latest-buy {
-    background: rgb(198,78,201);
-    background: linear-gradient(90deg, rgba(198,78,201,1) 0%, rgba(116,118,251,1) 100%);
+    background: rgb(198, 78, 201);
+    background: linear-gradient(90deg, rgba(198, 78, 201, 1) 0%, rgba(116, 118, 251, 1) 100%);
     transition: 0.3s;
     color: #fff;
     margin-bottom: 25px;
     padding: 8px 75px;
     border-radius: 10px;
+
     &:hover {
         color: #dddddd;
     }
+
     text-align:center;
     border: 3px solid #ff37b2;
 }
 
 .gold-price {
-    background: -webkit-linear-gradient(0deg, #fffb03,#ffbb00);
+    background: -webkit-linear-gradient(0deg, #fffb03, #ffbb00);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -120,7 +123,14 @@
     margin-bottom: 10px;
 }
 
-.qr img{
+.column {
+    float: left;
     width: 50%;
-    height: auto;
+    padding: 5px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
 }

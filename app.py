@@ -305,8 +305,10 @@ def new_prod():
         url2 = f"https://drive.google.com/uc?id={form.url2.data}"
         image = [url1, url2]
         if name is None or category is None:
-            message = save_product(category, name, quantity, mrp, srp, image, temp_info)
-        return render_template('new_product.html', products=all_prod(), form=form, message=message)
+            pass
+        else:
+            save_product(category, name, quantity, mrp, srp, image, temp_info)
+        return render_template('new_product.html', products=all_prod(), form=form)
     return render_template('new_product.html', products=all_prod(),
         form=form, message="Hello There")
 

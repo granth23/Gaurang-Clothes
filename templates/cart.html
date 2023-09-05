@@ -45,8 +45,16 @@
             <input class="cart-form" style="width: 100%;" type="text" placeholder="Email" name="email" required>
             <textarea class="cart-form" style="width: 100%;" placeholder="Address" name="address" required></textarea>
             <input class="cart-form" style="width: 100%;" type="text" placeholder="UPI ID" name="upi" required>
-            <img src="https://drive.google.com/uc?id=1m7Z8Q3Up3Bj43dNt66-vBG834r-FDasP" class="qr">
-            <button class="latest-buy" style="width: 100%; font-size: 16px;" type="submit"><a href="{{ url_for('success') }}">Buy Now</button>
+            <div class="row" style="padding-right: 15%;">
+                <div class="column" style="padding-left: 0%;">
+                    <img data-enlargable src="{{ url_for('static',filename='pay.jpeg') }}" style="width:80%">
+                </div>
+                <div class="column" style="padding-right: 0%;">
+                    <img src="{{ url_for('static',filename='qr.jpeg') }}" style="width:80%">
+                </div>
+            </div>
+            <button class="latest-buy" style="width: 100%; font-size: 16px;" type="submit"><a
+                    href="{{ url_for('success') }}">Buy Now</button>
         </form>
         <div class="x-us-line" style="width: 100%;"></div>
     </div>
