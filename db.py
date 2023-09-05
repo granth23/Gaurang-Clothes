@@ -222,12 +222,11 @@ def mail(email, message):
 def save_product(category, name, quantity, mrp, srp, image, info):
     """Hi Audience"""
     _id = gen_id(16)
-    if f"{category} {name}" not in prod_names():
-        item = {'_id': _id, 'category': category, 'name': name,
-                'quantity': quantity, 'mrp': mrp, 'srp': srp, 'image': image, 'info': info}
-        products_collection.insert_one(item)
-        return "Item Added"
-    return "Item Already Present"
+    item = {'_id': _id, 'category': category, 'name': name,
+            'quantity': quantity, 'mrp': mrp, 'srp': srp, 'image': image, 'info': info}
+    print(item)
+    products_collection.insert_one(item)
+    return "Item Added"
 
 
 def update_product(_id, mrp, srp, quantity):
