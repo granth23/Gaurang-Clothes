@@ -43,6 +43,7 @@ class Info(FlaskForm):
     email = StringField('E-Mail')
     phone = StringField('Phone')
     address = StringField('Address')
+    upi = StringField('upi')
     submit = SubmitField('Submit')
 
 
@@ -159,6 +160,7 @@ def contact():
 @app.route("/cart", methods=['GET', 'POST'])
 def cart():
     """Hi Audience"""
+    form = Info()
     if current_user.is_authenticated:
         current = current_user.email
         tamount = get_total(current)
@@ -170,11 +172,14 @@ def cart():
             temp_ut['cqty'] = i['cqty']
             temp_ut['total'] = i['cqty']*temp_ut['srp']
             temp_x.append(temp_ut)
-            if request.method == "POST":
-                name = request.form.get("name")
-                phone = request.form.get("phone")
-                email = request.form.get("email")
-                address = request.form.get("address")
+            if form.validate_on_submit:
+                email = form.email.data
+                name = form.name.data
+                phone = form.phone.data
+                address = form.address.data
+                upi = form.upi.data
+                print(current_user.email, email, name, phone, address, upi)
+
         return render_template('cart.html', current=current, cart=temp_x,
             total_amount=tamount, total_qty=tqty)
     return redirect(url_for('home'))
@@ -185,6 +190,7 @@ def products(temp_x):
     """Hi Audience"""
     if temp_x in tags:
         temp_products = list(all_products(temp_x))
+        print(temp_products)
         for i in temp_products:
             for j in i:
                 if current_user.is_authenticated:
@@ -258,19 +264,6 @@ def remove(temp_x):
         return redirect(url_for('add', temp_x=temp_x))
 
 
-@app.route("/pay", methods=['GET', 'POST'])
-def pay():
-    """Hi Audience"""
-    form = Info()
-    if form.validate_on_submit:
-        email = form.email.data
-        name = form.name.data
-        phone = form.phone.data
-        address = form.address.data
-        add_info(current_user.email, email, name, phone, address)
-    return render_template('pay.html', email=email)
-
-
 @app.route("/success", methods=['GET', 'POST'])
 def success():
     """Hi Audience"""
@@ -285,6 +278,7 @@ def success():
     """
     mail(mail_to, message)
     mail("granthbagadia2004@gmail.com", "New Order Placed on Games-Trade India")
+    mail("f20220709@hyderabad.bits-pilani.ac.in", "New Order Placed on Games-Trade India")
     prod_qty(idt)
     flash("Order Placed Successfully!")
     return redirect(url_for('home'))
@@ -310,7 +304,8 @@ def new_prod():
         url1 = f"https://drive.google.com/uc?id={form.url1.data}"
         url2 = f"https://drive.google.com/uc?id={form.url2.data}"
         image = [url1, url2]
-        message = save_product(category, name, quantity, mrp, srp, image, temp_info)
+        if name is None or category is None:
+            message = save_product(category, name, quantity, mrp, srp, image, temp_info)
         return render_template('new_product.html', products=all_prod(), form=form, message=message)
     return render_template('new_product.html', products=all_prod(),
         form=form, message="Hello There")

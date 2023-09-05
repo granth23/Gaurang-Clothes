@@ -10,8 +10,8 @@
                 {% for i in cart %}
                 <div class="latest-block" onclick="redirect('product/{{i.get('_id')}}')">
                     <div class="latest-content">
-                        <img src="{{ i.get('image') }}" alt="" class="latest-img">
-                        <div class="latest-name">{{ i.get('category') }} {{ i.get('name') }}</div>
+                        <img src="{{ i.get('image')[0] }}" alt="" class="latest-img">
+                        <div class="latest-name" style="margin-bottom: 5px;">{{ i.get('name') }}</div>
                         <div class="latest-price">
                             {% if i.get('srp') == i.get('mrp') %}
                             <span class="gold-price">INR {{i.get('srp')}}</span>
@@ -39,12 +39,14 @@
         <br>
         <br>
         <br>
-        <form method="POST" action="{{ url_for('pay') }}">
+        <form method="POST">
             <input class="cart-form" style="width: 100%;" type="text" placeholder="Name" name="name" required>
             <input class="cart-form" style="width: 100%;" type="text" placeholder="Phone No." name="phone" required>
             <input class="cart-form" style="width: 100%;" type="text" placeholder="Email" name="email" required>
             <textarea class="cart-form" style="width: 100%;" placeholder="Address" name="address" required></textarea>
-            <button class="latest-buy" style="width: 100%; font-size: 16px;">Proceed to Checkout</button>
+            <input class="cart-form" style="width: 100%;" type="text" placeholder="UPI ID" name="upi" required>
+            <img src="https://drive.google.com/uc?id=1m7Z8Q3Up3Bj43dNt66-vBG834r-FDasP" class="qr">
+            <button class="latest-buy" style="width: 100%; font-size: 16px;" type="submit"><a href="{{ url_for('success') }}">Buy Now</button>
         </form>
         <div class="x-us-line" style="width: 100%;"></div>
     </div>
