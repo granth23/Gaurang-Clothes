@@ -39,7 +39,7 @@
         <br>
         <br>
         <br>
-        <form method="POST">
+        <form method="POST" action="{{ url_for('success') }}">
             <input class="cart-form" style="width: 100%;" type="text" placeholder="Name" name="name" required>
             <input class="cart-form" style="width: 100%;" type="text" placeholder="Phone No." name="phone" required>
             <input class="cart-form" style="width: 100%;" type="text" placeholder="Email" name="email" required>
@@ -53,8 +53,7 @@
                     <img src="{{ url_for('static',filename='qr.jpeg') }}" style="width:80%">
                 </div>
             </div>
-            <button class="latest-buy" style="width: 100%; font-size: 16px;" type="submit"><a
-                    href="{{ url_for('success') }}">Buy Now</button>
+            <button class="latest-buy" style="width: 100%; font-size: 16px;" type="submit">Buy Now</button>
         </form>
         <div class="x-us-line" style="width: 100%;"></div>
     </div>

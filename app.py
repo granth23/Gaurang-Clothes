@@ -271,14 +271,15 @@ def success():
     idt, mail_to = bill(email)
     empty_cart(email)
     message = f"""From: From granthbagadia2004@gmail.com
-    Subject: Order Placed Successfully!
+To: To Person {mail_to}
+Subject: Order Placed Successfully
 
-    This is a confirmation for your order on Games-Trade India.
-    Your Order ID is {str(idt)}
-    """
+This is a confirmation for your order on CampusChic.
+Your Order ID is {str(idt)}
+"""
     mail(mail_to, message)
-    mail("granthbagadia2004@gmail.com", "New Order Placed on Games-Trade India")
-    mail("f20220709@hyderabad.bits-pilani.ac.in", "New Order Placed on Games-Trade India")
+    mail("granthbagadia2004@gmail.com", "New Order Placed on Campus Chic")
+    mail("f20220709@hyderabad.bits-pilani.ac.in", "New Order Placed on Campus Chic")
     prod_qty(idt)
     flash("Order Placed Successfully!")
     return redirect(url_for('home'))
