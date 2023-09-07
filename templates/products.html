@@ -3,103 +3,128 @@
 
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='products.css') }}">
 
-<section class="latest">
-    <h1 class="latest-title">{{x}}</h1>
-    {% if products == [] %}
-    <center>
-        <h3 class="no-items">No Items available</h3>
-    </center>
-    {% else %}
-    {% for j in range(lenproducts) %}
-    <div id={{j+1}} class="latest-flex" style="display:none;">
-        {% for i in products[j] %}
-        <div class="latest-block" onclick="redirect('product/{{i.get('_id')}}')">
-            <div class="latest-content">
-                <img src="{{ i.get('image')[0] }}" alt="" class="latest-img">
-                <div class="latest-name" style="margin-bottom: 5px;">{{ i.get('name') }}</div>
-                <div class="latest-price">
-                    {% if i.get('srp') == i.get('mrp') %}
-                    <span class="gold-price">INR {{i.get('srp')}}</span>
+<body>
+
+    <div id="loader" class="center"></div>
+
+    <section class="latest">
+        <h1 class="latest-title">{{x}}</h1>
+        {% if products == [] %}
+        <center>
+            <h3 class="no-items">No Items available</h3>
+        </center>
+        {% else %}
+        {% for j in range(lenproducts) %}
+        <div id={{j+1}} class="latest-flex" style="display:none;">
+            {% for i in products[j] %}
+            <div class="latest-block" onclick="redirect('product/{{i.get('_id')}}')">
+                <div class="latest-content">
+                    <img src="{{ i.get('image')[0] }}" alt="" class="latest-img">
+                    <div class="latest-name" style="margin-bottom: 5px;">{{ i.get('name') }}</div>
+                    <div class="latest-price">
+                        {% if i.get('srp') == i.get('mrp') %}
+                        <span class="gold-price">INR {{i.get('srp')}}</span>
+                        {% else %}
+                        <span class="gold-price">INR {{i.get('srp')}}</span>
+                        &nbsp;&nbsp;&nbsp; <!-- adds space -->
+                        <span style="text-decoration: line-through;">INR {{i.get('mrp')}}</span>
+                        {% endif %}
+                    </div>
+                    {% if i.get('cqty') == 0 %}
+                    <div class="latest-buy"><a href="/add/{{i.get('_id')}}">Add to cart</a></div>
                     {% else %}
-                    <span class="gold-price">INR {{i.get('srp')}}</span>
-                    &nbsp;&nbsp;&nbsp; <!-- adds space -->
-                    <span style="text-decoration: line-through;">INR {{i.get('mrp')}}</span>
+                    <div class="latest-buy"><a href="/remove/{{i.get('_id')}}">Remove from cart</a></div>
                     {% endif %}
                 </div>
-                {% if i.get('cqty') == 0 %}
-                <div class="latest-buy"><a href="/add/{{i.get('_id')}}">Add to cart</a></div>
-                {% else %}
-                <div class="latest-buy"><a href="/remove/{{i.get('_id')}}">Remove from cart</a></div>
-                {% endif %}
             </div>
+            {% endfor %}
         </div>
         {% endfor %}
+        {% endif %}
+    </section>
+
+    <div class="next-prev-flex">
+        <img onclick="change_page(1)" id="p" style="visibility:hidden;" class="next-prev-button prev" fill="white"
+            src="{{url_for('static', filename='assets/prev.svg')}}" />
+        <img onclick="change_page({{lenproducts}})" id="n" style="visibility:hidden;" class="next-prev-button next"
+            fill="white" src="{{url_for('static', filename='assets/next.svg')}}" />
     </div>
-    {% endfor %}
-    {% endif %}
-</section>
 
-<div class="next-prev-flex">
-    <img onclick="change_page(1)" id="p" style="visibility:hidden;" class="next-prev-button prev" fill="white" src="{{url_for('static', filename='assets/prev.svg')}}" />
-    <img onclick="change_page({{lenproducts}})" id="n" style="visibility:hidden;" class="next-prev-button next" fill="white" src="{{url_for('static', filename='assets/next.svg')}}" />
-</div>
+    <script>
 
-<script>
+        document.getElementById("1").style.display = 'flex';
 
-    document.getElementById("1").style.display = 'flex';
+        var l = {{ lenproducts }};
 
-    var l = {{ lenproducts }};
-
-    if (l > 1) {
-        console.log(l);
-        document.getElementById("n").style.visibility = 'visible';
-    }
-
-
-    function page_check() {
-        if (document.getElementById(1).style.display == "flex") {
-            document.getElementById("p").style.visibility = 'hidden';
-        } else {
-            document.getElementById("p").style.visibility = 'visible';
-        }
-        if (document.getElementById(l).style.display == "flex") {
-            document.getElementById("n").style.visibility = 'hidden';
-        } else {
+        if (l > 1) {
+            console.log(l);
             document.getElementById("n").style.visibility = 'visible';
         }
-    }
 
-    function show(x) {
-        for (let i = 1; i < l + 1; i++) {
-            if (i == x) {
-                document.getElementById(i).style.display = "flex";
+
+        function page_check() {
+            if (document.getElementById(1).style.display == "flex") {
+                document.getElementById("p").style.visibility = 'hidden';
             } else {
-                document.getElementById(i).style.display = "none";
+                document.getElementById("p").style.visibility = 'visible';
+            }
+            if (document.getElementById(l).style.display == "flex") {
+                document.getElementById("n").style.visibility = 'hidden';
+            } else {
+                document.getElementById("n").style.visibility = 'visible';
             }
         }
-    }
 
-    function change_page(page) {
-        if (document.getElementById(page).style.display == "none") {
+        function show(x) {
             for (let i = 1; i < l + 1; i++) {
-                if (document.getElementById(i).style.display == "flex") {
-                    if (page == 1) {
-                        show(i - 1);
-                    }
-                    else {
-                        show(i + 1);
-                    }
-                    page_check();
-                    break;
+                if (i == x) {
+                    document.getElementById(i).style.display = "flex";
+                } else {
+                    document.getElementById(i).style.display = "none";
                 }
             }
         }
-    }
 
-    function redirect(i) {
-        window.location.href ="https://campus-chic-9kul.onrender.com/" + i;
-    }
+        function change_page(page) {
+            if (document.getElementById(page).style.display == "none") {
+                for (let i = 1; i < l + 1; i++) {
+                    if (document.getElementById(i).style.display == "flex") {
+                        if (page == 1) {
+                            show(i - 1);
+                        }
+                        else {
+                            show(i + 1);
+                        }
+                        page_check();
+                        break;
+                    }
+                }
+            }
+        }
 
-</script>
+        function redirect(i) {
+            window.location.href = "https://campus-chic-9kul.onrender.com/" + i;
+        }
+
+    </script>
+
+    <script>
+        document.onreadystatechange = function () {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                    "body").style.visibility = "hidden";
+                document.querySelector(
+                    "#loader").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                    "#loader").style.display = "none";
+                document.querySelector(
+                    "body").style.visibility = "visible";
+            }
+        };
+    </script>
+
+</body>
+
 
 {% endblock content %}

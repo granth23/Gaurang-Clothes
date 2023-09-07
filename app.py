@@ -5,7 +5,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
 from flask import Flask, render_template, request, redirect, url_for, flash
 import uuid
-from time import sleep
 
 from db import get_user, save_user, remove_from_cart, add_into_cart, set_qty
 from db import user_cart_prod, add_info, get_cart
@@ -102,7 +101,6 @@ def home():
     latest_products.reverse()
     updates = all_updates()
     updates.reverse()
-    sleep(15)
     return render_template('home.html', latest_prod=latest_products, updates=updates)
 
 
@@ -142,7 +140,6 @@ def search():
                                 return redirect(url_for('home'))
         return render_template('products.html', lenproducts=len(products), products=products, cart = cartx, x = search_data)
     else:
-        sleep(15)
         return render_template('home.html')
 
 
@@ -181,11 +178,9 @@ def cart():
                 phone = form.phone.data
                 address = form.address.data
                 upi = form.upi.data
-                print(current_user.email, email, name, phone, address, upi)
-
         return render_template('cart.html', current=current, cart=temp_x,
             total_amount=tamount, total_qty=tqty)
-    sleep(15)
+
     return redirect(url_for('home'))
 
 
@@ -194,7 +189,6 @@ def products(temp_x):
     """Hi Audience"""
     if temp_x in tags:
         temp_products = list(all_products(temp_x))
-        print(temp_products)
         for i in temp_products:
             for j in i:
                 if current_user.is_authenticated:
@@ -212,7 +206,7 @@ def products(temp_x):
                 temp_ut = get_product_id(i['_id'])
                 temp_ut['cqty'] = i['cqty']
                 cartx.append(temp_ut)
-        sleep(15)
+
         return render_template('products.html', lenproducts=len(temp_products),
             products=temp_products, cart=cartx, x=temp_x)
     return render_template('505.html')
@@ -225,7 +219,7 @@ def product(temp_x):
             cqty = user_cart_prod(current_user.email, temp_x)
         else:
             cqty = 1
-        sleep(15)
+
         return render_template('item.html', product=get_product(temp_x), cqty=cqty)
     return render_template('505.html')
 

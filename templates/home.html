@@ -5,136 +5,192 @@
 
 <!-- SECTION I: CAROUSEL AND INTRO -->
 
-<section class="carousel-back">
-    <div class="carousel-overlay"></div>
-    <div class="intro">
-        <div class="intro-box">
-            <h1 class="slogan">
-                <span class="slogan-1">Slay</span>&nbsp; It
+<style>
+    #loader {
+        border: 12px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 12px solid #444444;
+        width: 70px;
+        height: 70px;
+        animation: spin 1s linear infinite;
+    }
+
+    .center {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<body>
+
+    <div id="loader" class="center"></div>
+
+    <section class="carousel-back">
+        <div class="carousel-overlay"></div>
+        <div class="intro">
+            <div class="intro-box">
+                <h1 class="slogan">
+                    <span class="slogan-1">Slay</span>&nbsp; It
+                    <br>
+                    Stay <span class="slogan-1">Lit</span>
+                </h1>
                 <br>
-                Stay <span class="slogan-1">Lit</span>
-            </h1>
-            <br>
-            <h1 class="slogan-line-2">
-                Just at <span class="slogan-2">CampusChic</span></span>
-            </h1>
-            <br>
-            <h2 class="slogan-desc">
-                Ready to slay? Discover fierce fashion that lets you own your style and express yourself with unstoppable flair and attitude!
-            </h2>
-        </div>
-    </div>
-
-    <div class="carousel">
-        <div class="slides">
-            <img src="{{url_for('static', filename='assets/Carousel/c1.png')}}" alt="slide image" class="slide">
-            <img src="{{url_for('static', filename='assets/Carousel/c2.png')}}" alt="slide image" class="slide">
-            <img src="{{url_for('static', filename='assets/Carousel/c3.png')}}" alt="slide image" class="slide">
-            <img src="{{url_for('static', filename='assets/Carousel/c4.png')}}" alt="slide image" class="slide">
-            <img src="{{url_for('static', filename='assets/Carousel/c5.png')}}" alt="slide image" class="slide">
-            <img src="{{url_for('static', filename='assets/Carousel/c6.png')}}" alt="slide image" class="slide">
-        </div>
-        <div class="controls">
-            <div class="control prev-slide">&#9668;</div>
-            <div class="control next-slide">&#9658;</div>
-        </div>
-    </div>
-</section>
-
-<!-- SECTION II: LATEST ABOUT US -->
-
-<section class="about">
-    <div class="about-flex">
-        <div class="about-block">
-            <h3 class="about-title">Who are We?</h3>
-            <div class="about-text">
-                Welcome to our budding venture, a BITSian startup initiated by yours truly. Dedicated to our BITS Pilani
-                community, we're excited to present a collection of fashion essentials. As we take our first steps into
-                this venture, we're well aware that the path ahead might hold challenges. However, driven by a genuine
-                passion for startups and a shared BITSian spirit, we're committed to delivering something special. While
-                our concept might not be groundbreaking, our enthusiasm and determination certainly are. Your input and
-                critiques are highly valued as we navigate this journey of growth and exploration together. Thank you
-                for joining us on this exciting BITSian startup expedition!
+                <h1 class="slogan-line-2">
+                    Just at <span class="slogan-2">CampusChic</span></span>
+                </h1>
+                <br>
+                <h2 class="slogan-desc">
+                    Ready to slay? Discover fierce fashion that lets you own your style and express yourself with
+                    unstoppable flair and attitude!
+                </h2>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- SECTION III: LATEST Products -->
+        <div class="carousel">
+            <div class="slides">
+                <img src="{{url_for('static', filename='assets/Carousel/c1.png')}}" alt="slide image" class="slide">
+                <img src="{{url_for('static', filename='assets/Carousel/c2.png')}}" alt="slide image" class="slide">
+                <img src="{{url_for('static', filename='assets/Carousel/c3.png')}}" alt="slide image" class="slide">
+                <img src="{{url_for('static', filename='assets/Carousel/c4.png')}}" alt="slide image" class="slide">
+                <img src="{{url_for('static', filename='assets/Carousel/c5.png')}}" alt="slide image" class="slide">
+                <img src="{{url_for('static', filename='assets/Carousel/c6.png')}}" alt="slide image" class="slide">
+            </div>
+            <div class="controls">
+                <div class="control prev-slide">&#9668;</div>
+                <div class="control next-slide">&#9658;</div>
+            </div>
+        </div>
+    </section>
 
-<section class="latest">
-    <h1 class="latest-title">Latest Products</h1>
-    <div class="latest-flex">
+    <!-- SECTION II: LATEST ABOUT US -->
 
-        {% for i in latest_prod %}
-        <div class="latest-block" onclick="redirect('product/{{i.get('_id')}}')">
-            <div class="latest-content">
-                <img src="{{ i.get('image')[0] }}" alt="" class="latest-img">
-                <div class="latest-name" style="margin-bottom: 5px;">{{ i.get('name') }}</div>
-                <div class="latest-price">
-                    {% if i.get('srp') == i.get('mrp') %}
-                    <span class="gold-price">INR {{i.get('srp')}}</span>
+    <section class="about">
+        <div class="about-flex">
+            <div class="about-block">
+                <h3 class="about-title">Who are We?</h3>
+                <div class="about-text">
+                    Welcome to our budding venture, a BITSian startup initiated by yours truly. Dedicated to our BITS
+                    Pilani
+                    community, we're excited to present a collection of fashion essentials. As we take our first steps
+                    into
+                    this venture, we're well aware that the path ahead might hold challenges. However, driven by a
+                    genuine
+                    passion for startups and a shared BITSian spirit, we're committed to delivering something special.
+                    While
+                    our concept might not be groundbreaking, our enthusiasm and determination certainly are. Your input
+                    and
+                    critiques are highly valued as we navigate this journey of growth and exploration together. Thank
+                    you
+                    for joining us on this exciting BITSian startup expedition!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION III: LATEST Products -->
+
+    <section class="latest">
+        <h1 class="latest-title">Latest Products</h1>
+        <div class="latest-flex">
+
+            {% for i in latest_prod %}
+            <div class="latest-block" onclick="redirect('product/{{i.get('_id')}}')">
+                <div class="latest-content">
+                    <img src="{{ i.get('image')[0] }}" alt="" class="latest-img">
+                    <div class="latest-name" style="margin-bottom: 5px;">{{ i.get('name') }}</div>
+                    <div class="latest-price">
+                        {% if i.get('srp') == i.get('mrp') %}
+                        <span class="gold-price">INR {{i.get('srp')}}</span>
+                        {% else %}
+                        <span class="gold-price">INR {{i.get('srp')}}</span>
+                        &nbsp;&nbsp;&nbsp; <!-- adds space -->
+                        <span style="text-decoration: line-through;">INR {{i.get('mrp')}}</span>
+                        {% endif %}
+                    </div>
+                    {% if i.get('cqty') == 0 %}
+                    <div class="latest-buy"><a href="/add/{{i.get('_id')}}">Add to cart</a></div>
                     {% else %}
-                    <span class="gold-price">INR {{i.get('srp')}}</span>
-                    &nbsp;&nbsp;&nbsp; <!-- adds space -->
-                    <span style="text-decoration: line-through;">INR {{i.get('mrp')}}</span>
+                    <div class="latest-buy"><a href="/remove/{{i.get('_id')}}">Remove from cart</a></div>
                     {% endif %}
                 </div>
-                {% if i.get('cqty') == 0 %}
-                <div class="latest-buy"><a href="/add/{{i.get('_id')}}">Add to cart</a></div>
-                {% else %}
-                <div class="latest-buy"><a href="/remove/{{i.get('_id')}}">Remove from cart</a></div>
-                {% endif %}
             </div>
+            {% endfor %}
+
         </div>
-        {% endfor %}
+    </section>
 
-    </div>
-</section>
+    <!-- CAROUSEL SCRIPT -->
 
-<!-- CAROUSEL SCRIPT -->
+    <script>
+        const delay = 3000; //ms
+        const slides = document.querySelector(".slides");
+        const slidesCount = slides.childElementCount;
+        const maxLeft = (slidesCount - 1) * 100 * -1;
 
-<script>
-    const delay = 3000; //ms
-    const slides = document.querySelector(".slides");
-    const slidesCount = slides.childElementCount;
-    const maxLeft = (slidesCount - 1) * 100 * -1;
+        let current = 0;
 
-    let current = 0;
+        function changeSlide(next = true) {
+            if (next) {
+                current += current > maxLeft ? -100 : current * -1;
+            } else {
+                current = current < 0 ? current + 100 : maxLeft;
+            }
 
-    function changeSlide(next = true) {
-        if (next) {
-            current += current > maxLeft ? -100 : current * -1;
-        } else {
-            current = current < 0 ? current + 100 : maxLeft;
+            slides.style.left = current + "%";
         }
 
-        slides.style.left = current + "%";
-    }
+        let autoChange = setInterval(changeSlide, delay);
+        const restart = function () {
+            clearInterval(autoChange);
+            autoChange = setInterval(changeSlide, delay);
+        };
 
-    let autoChange = setInterval(changeSlide, delay);
-    const restart = function () {
-        clearInterval(autoChange);
-        autoChange = setInterval(changeSlide, delay);
-    };
+        // Controls
+        document.querySelector(".next-slide").addEventListener("click", function () {
+            changeSlide();
+            restart();
+        });
 
-    // Controls
-    document.querySelector(".next-slide").addEventListener("click", function () {
-        changeSlide();
-        restart();
-    });
+        document.querySelector(".prev-slide").addEventListener("click", function () {
+            changeSlide(false);
+            restart();
+        });
 
-    document.querySelector(".prev-slide").addEventListener("click", function () {
-        changeSlide(false);
-        restart();
-    });
+        function redirect(i) {
+            window.location.href = "http://127.0.0.1:3000/" + i;
+        }
 
-    function redirect(i) {
-        window.location.href = "http://127.0.0.1:3000/" + i;
-    }
+    </script>
 
-</script>
 
+    <script>
+        document.onreadystatechange = function () {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                    "body").style.visibility = "hidden";
+                document.querySelector(
+                    "#loader").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                    "#loader").style.display = "none";
+                document.querySelector(
+                    "body").style.visibility = "visible";
+            }
+        };
+    </script>
+
+
+</body>
 
 
 {% endblock content %}

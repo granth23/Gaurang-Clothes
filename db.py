@@ -224,7 +224,6 @@ def save_product(category, name, quantity, mrp, srp, image, info):
     _id = gen_id(16)
     item = {'_id': _id, 'category': category, 'name': name,
             'quantity': quantity, 'mrp': mrp, 'srp': srp, 'image': image, 'info': info}
-    print(item)
     products_collection.insert_one(item)
     return "Item Added"
 
