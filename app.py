@@ -39,7 +39,6 @@ class New(FlaskForm):
 
 class Info(FlaskForm):
     """Hi Audience"""
-    name = StringField('Name')
     email = StringField('E-Mail')
     phone = StringField('Phone')
     address = StringField('Address')
@@ -174,7 +173,6 @@ def cart():
             temp_x.append(temp_ut)
             if form.validate_on_submit:
                 email = form.email.data
-                name = form.name.data
                 phone = form.phone.data
                 address = form.address.data
                 upi = form.upi.data

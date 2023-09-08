@@ -3,8 +3,36 @@
 
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='cart.css') }}">
 
+<style>
+    #loader {
+        border: 12px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 12px solid #444444;
+        width: 70px;
+        height: 70px;
+        animation: spin 1s linear infinite;
+    }
+
+    .center {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
 <body>
+
     <div id="loader" class="center"></div>
+
     <div id="boxes">
         <div id="leftbox">
             <section class="latest">
@@ -42,7 +70,6 @@
             <br>
             <br>
             <form method="POST" action="{{ url_for('success') }}">
-                <input class="cart-form" style="width: 100%;" type="text" placeholder="Name" name="name" required>
                 <input class="cart-form" style="width: 100%;" type="text" placeholder="Phone No." name="phone" required>
                 <input class="cart-form" style="width: 100%;" type="text" placeholder="Email" name="email" required>
                 <textarea class="cart-form" style="width: 100%;" placeholder="Address" name="address" required></textarea>
@@ -60,6 +87,7 @@
             <div class="x-us-line" style="width: 100%;"></div>
         </div>
     </div>
+
     <script>
         document.onreadystatechange = function () {
             if (document.readyState !== "complete") {
@@ -75,5 +103,8 @@
             }
         };
     </script>
+
 </body>
+
+
 {% endblock content %}
