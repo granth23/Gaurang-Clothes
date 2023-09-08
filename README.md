@@ -1,2 +1,3 @@
-# Games-Trade
-E-Commerce Website currently under development
+#Campus Chic
+
+E-Commerce website developed for a specialised clothing line
