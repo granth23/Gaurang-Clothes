@@ -308,13 +308,14 @@ def latest_prod(email=None):
     """Hi Audience"""
     temp_var = []
     for i in products_collection.find({}):
-        i['cqty'] = 0
-        if email != None:
-            cart = get_cart(email)
-            for j in cart:
-                if j['_id'] == i['_id']:
-                    i['cqty'] = j['cqty']
-        temp_var.append(i)
+        if (i['quantity']) > 0:
+            i['cqty'] = 0
+            if email != None:
+                cart = get_cart(email)
+                for j in cart:
+                    if j['_id'] == i['_id']:
+                        i['cqty'] = j['cqty']
+            temp_var.append(i)
     return temp_var
 
 
