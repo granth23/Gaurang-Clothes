@@ -170,7 +170,7 @@ def bill(email):
     for i in info_collection.find({'_id': email}):
         info_collection.delete_one({'_id': email})
         idt = gen_id(16)
-        temp_order = {'_id': idt, 'name': i.get('name'), 'phone': i.get('phone'), 'address': i.get(
+        temp_order = {'_id': idt, 'upi': i.get('upi'), 'phone': i.get('phone'), 'address': i.get(
             'address'), 'cart': get_cart(email), 'email': email, 'amount': get_total(email)}
         orders_collection.insert_one(temp_order)
         return idt, i['email']
@@ -196,7 +196,7 @@ def empty_cart(email):
     users_collection.update_one({'_id': _id}, {"$set": {'cart': cart}})
 
 
-def add_info(curr_id, email, phone, address):
+def add_info(curr_id, email, phone, address, upi):
     """Hi Audience"""
     temp_y = 0
     temp_x = 0
@@ -206,9 +206,9 @@ def add_info(curr_id, email, phone, address):
             temp_x += 1
     if temp_x != temp_y:
         info_collection.delete_one({'_id': curr_id})
-        info_collection.insert_one({'_id': curr_id, 'email': email, 'phone': phone, 'address': address})
+        info_collection.insert_one({'_id': curr_id, 'email': email, 'phone': phone, 'address': address, 'upi': upi})
     else:
-        info_collection.insert_one({'_id': curr_id, 'email': email, 'phone': phone, 'address': address})
+        info_collection.insert_one({'_id': curr_id, 'email': email, 'phone': phone, 'address': address, 'upi': upi})
 
 
 def mail(email, message):

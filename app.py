@@ -177,7 +177,7 @@ def cart():
                 address = form.address.data
                 upi = form.upi.data
                 if email is not None:
-                    add_info(current_user.email, email, phone, address)
+                    add_info(current_user.email, email, phone, address, upi)
                     return redirect(url_for('success'))
         return render_template('cart.html', current=current, cart=temp_x,
             total_amount=tamount, total_qty=tqty)
