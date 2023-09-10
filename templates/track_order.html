@@ -16,39 +16,11 @@
         <button class="latest-buy" style="width: 100%; font-size: 16px;">Check Status</button>
     </form>
 </div>
+{% if stat == 1 %}
 <div id="boxes">
-    <div id="leftbox">
-        <section class="latest">
-            <div class="latest-flex">
-                <div class="latest-block" onclick="redirect('product/{{i.get('_id')}}')">
-                    <div class="latest-content">
-                        <img src="logo.png" alt="" class="latest-img">
-                        <div class="latest-name">PS5 GTA V</div>
-                        <div class="latest-price">
-                            <span class="gold-price">INR 500</span>
-                            &nbsp;&nbsp;&nbsp; <!-- adds space -->
-                            <span style="text-decoration: line-through;">INR 700 </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="latest-block" onclick="redirect('product/{{i.get('_id')}}')">
-                    <div class="latest-content">
-                        <img src="logo.png" alt="" class="latest-img">
-                        <div class="latest-name">PS5 GTA V</div>
-                        <div class="latest-price">
-                            <span class="gold-price">INR 500</span>
-                            &nbsp;&nbsp;&nbsp; <!-- adds space -->
-                            <span style="text-decoration: line-through;">INR 700 </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <div id="rightbox">
-        <span style="float: left;" class="x-us-title">Delivery By: 12/08/2023</span><br><br><br>
-        <span style="float: left;" class="x-us-title">Current Status: Out for Delivery</span>
-    </div>
+    <span style="float: left;" class="x-us-title">Delivery By: {{order['Time']}}</span><br>
+    <span style="float: left;" class="x-us-title">Current Status: {{order['Status']}}</span>
 </div>
+{% endif %}
 
 {% endblock content %}

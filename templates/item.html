@@ -26,7 +26,7 @@
             {% endif %}
         </div>
         <div class="desc">{{product.get('info')}}</div>
-        <div class="buy">Add to Cart</div>
+        <div class="buy"><a href="/add/{{product.get('_id')}}">Add to cart</a></div>
     </div>
 </section>
 

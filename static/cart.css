@@ -1,17 +1,19 @@
 #boxes {
     margin-left: 10px;
     margin-right: 10px;
+    display: flex;
+    flex-direction: row;
 }
 
 #leftbox {
-    float: left;
+    /* float: left; */
     /* background: Red; */
     width: 60%;
     padding: 1%;
 }
 
 #rightbox {
-    float: right;
+    /* float: right; */
     /* background: blue; */
     width: 40%;
     padding: 3%;
@@ -134,3 +136,15 @@
     clear: both;
     display: table;
 }
+
+@media screen and (max-width: 600px) {
+    #boxes {
+        flex-direction: column;
+    }
+    #leftbox {
+        width: 100%;
+    }
+    #rightbox {
+        width: 100%;
+    }
+  }

@@ -70,7 +70,12 @@ def add_into_cart(email, item):
     "Add item to cart"
     _id = email.split("@")[0]
     cart = get_cart(email)
-    cart.append({'_id': item, 'cqty': 1})
+    print(cart)
+    for i in cart:
+        if str(i['_id']) == item:
+            break
+    else:
+        cart.append({'_id': item, 'cqty': 1})
     users_collection.update_one({'_id': _id}, {"$set": {'cart': cart}})
 
 

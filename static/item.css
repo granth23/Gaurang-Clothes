@@ -114,3 +114,47 @@
         color: #3d3d3d;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .item-flex {
+        height: auto;
+        flex-direction: column;
+        padding: 10px 10px;
+        align-items: center;
+    }
+    .gallery {
+        height: 40px;
+        width: 100%;
+        flex-direction: row;
+        margin-bottom: 20px;
+    }
+    .gallery-img {
+        width: auto;
+        height: 100%;
+        border-radius: 0;
+        margin: 10px 7px;
+    }
+    .photo {
+        height: auto !important;
+        width: 90% !important;
+    }
+    .photo-div {
+        height: auto !important;
+        width: 100% !important;
+    }
+    .photo-img {
+        height: auto !important;
+        width: 100% !important;
+        border-radius: 10px;
+    }
+    .details {
+        height: auto;
+        width: 100%;
+    }
+    .title {
+        width: 100%;
+    }
+    .desc {
+        width: 100%;
+    }
+  }

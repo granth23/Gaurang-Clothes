@@ -361,6 +361,7 @@ def track_order():
         order_id = form.order_id.data
         for i in all_orders():
             if i['_id'] == order_id:
+                print(i)
                 return render_template('track_order.html', order=i, products=all_prod(), stat=1)
     return render_template('track_order.html', stat=0)
 

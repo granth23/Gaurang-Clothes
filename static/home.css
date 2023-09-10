@@ -435,3 +435,17 @@
 .updates-date {
     color: #d8d8d8;
 }
+
+@media screen and (max-width: 600px) {
+    .slogan-desc {
+        width: 78%;
+        position: relative;
+        left: -36px;
+    }
+    .about-flex {
+        padding-top: 0;
+    }
+    .about-block {
+        width: 100%;
+    }
+  }
