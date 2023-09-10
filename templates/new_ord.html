@@ -46,6 +46,10 @@
             </span>
             &nbsp;&nbsp;
             <span class="example" style="width:100px">
+                EMAIL: {{i.get('email')}}
+            </span>
+            &nbsp;&nbsp;
+            <span class="example" style="width:100px">
                 INR: {{i.get('amount')}}
             </span>
             &nbsp;&nbsp;
@@ -65,7 +69,7 @@
 
 <script>
     function redirect(i) {
-        window.location.href = "campus-chic-9kul.onrender.com" + i;
+        window.location.href = i;
     }
 
 </script>

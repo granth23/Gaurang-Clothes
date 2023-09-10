@@ -167,14 +167,18 @@ def gen_id(temp_varl):
 
 def bill(email):
     """Hi Audience"""
-    for i in info_collection.find({'_id': email}):
-        info_collection.delete_one({'_id': email})
-        idt = gen_id(16)
-        temp_order = {'_id': idt, 'upi': i.get('upi'), 'phone': i.get('phone'), 'address': i.get(
-            'address'), 'cart': get_cart(email), 'email': email, 'amount': get_total(email)}
-        orders_collection.insert_one(temp_order)
-        return idt, i['email']
-
+    cart = get_cart(email)
+    for i in cart:
+        prod = products_collection.find_one({'_id': i.get('_id')})
+        if prod.get('quantity') >= i.get('cqty'):
+            for i in info_collection.find({'_id': email}):
+                info_collection.delete_one({'_id': email})
+                idt = gen_id(16)
+                temp_order = {'_id': idt, 'upi': i.get('upi'), 'phone': i.get('phone'), 'address': i.get(
+                    'address'), 'cart': get_cart(email), 'email': i.get('email'), 'amount': get_total(email)}
+                orders_collection.insert_one(temp_order)
+                return idt, i['email']
+    return None, None
 
 def prod_qty(idt):
     """Hi Audience"""
@@ -311,7 +315,6 @@ def latest_prod(email=None):
                 if j['_id'] == i['_id']:
                     i['cqty'] = j['cqty']
         temp_var.append(i)
-    temp_var = temp_var[-4:]
     return temp_var
 
 

@@ -98,6 +98,10 @@ def home():
     else:
         latest_products = latest_prod()
     latest_products.reverse()
+    for i in latest_products:
+        if i['quantity'] <= 0:
+            latest_products.remove(i)
+    latest_products = latest_products[:4]
     updates = all_updates()
     updates.reverse()
     return render_template('home.html', latest_prod=latest_products, updates=updates)
@@ -270,6 +274,9 @@ def success():
     """Hi Audience"""
     email = current_user.email
     idt, mail_to = bill(str(email))
+    if idt is None:
+        return redirect(url_for('home'))
+
     empty_cart(email)
     message = f"""From: From granthbagadia2004@gmail.com
 To: To Person {mail_to}
