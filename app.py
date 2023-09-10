@@ -98,13 +98,13 @@ def home():
     else:
         latest_products = latest_prod()
     latest_products.reverse()
-    for i in latest_products:
-        if i['quantity'] <= 0:
-            latest_products.remove(i)
-    latest_products = latest_products[:4]
+    bruh = []
+    for i in range(4):
+        if latest_products[i]['quantity'] > 0:
+            bruh.append(i)
     updates = all_updates()
     updates.reverse()
-    return render_template('home.html', latest_prod=latest_products, updates=updates)
+    return render_template('home.html', latest_prod=bruh, updates=updates)
 
 
 
