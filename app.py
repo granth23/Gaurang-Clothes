@@ -176,6 +176,9 @@ def cart():
                 phone = form.phone.data
                 address = form.address.data
                 upi = form.upi.data
+                if email is not None:
+                    add_info(current_user.email, email, phone, address)
+                    return redirect(url_for('success'))
         return render_template('cart.html', current=current, cart=temp_x,
             total_amount=tamount, total_qty=tqty)
 
@@ -266,7 +269,7 @@ def remove(temp_x):
 def success():
     """Hi Audience"""
     email = current_user.email
-    idt, mail_to = bill(email)
+    idt, mail_to = bill(str(email))
     empty_cart(email)
     message = f"""From: From granthbagadia2004@gmail.com
 To: To Person {mail_to}
@@ -361,7 +364,6 @@ def track_order():
         order_id = form.order_id.data
         for i in all_orders():
             if i['_id'] == order_id:
-                print(i)
                 return render_template('track_order.html', order=i, products=all_prod(), stat=1)
     return render_template('track_order.html', stat=0)
 

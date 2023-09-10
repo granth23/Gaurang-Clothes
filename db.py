@@ -70,7 +70,6 @@ def add_into_cart(email, item):
     "Add item to cart"
     _id = email.split("@")[0]
     cart = get_cart(email)
-    print(cart)
     for i in cart:
         if str(i['_id']) == item:
             break
@@ -197,7 +196,7 @@ def empty_cart(email):
     users_collection.update_one({'_id': _id}, {"$set": {'cart': cart}})
 
 
-def add_info(curr_id, email, name, phone, address):
+def add_info(curr_id, email, phone, address):
     """Hi Audience"""
     temp_y = 0
     temp_x = 0
@@ -207,9 +206,9 @@ def add_info(curr_id, email, name, phone, address):
             temp_x += 1
     if temp_x != temp_y:
         info_collection.delete_one({'_id': curr_id})
-        info_collection.insert_one({'_id': curr_id, 'email': email, 'name': name, 'phone': phone, 'address': address})
+        info_collection.insert_one({'_id': curr_id, 'email': email, 'phone': phone, 'address': address})
     else:
-        info_collection.insert_one({'_id': curr_id, 'email': email, 'name': name, 'phone': phone, 'address': address})
+        info_collection.insert_one({'_id': curr_id, 'email': email, 'phone': phone, 'address': address})
 
 
 def mail(email, message):
